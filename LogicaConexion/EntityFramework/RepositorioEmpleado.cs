@@ -39,15 +39,15 @@ namespace LogicaConexion.EntityFramework
             {
                 var empleado = GetById(id);
                 if (nombre != null)
-                    empleado.Name = nombre;
+                    empleado.Name.Data = nombre;
                 if (apellido != null)
-                    empleado.Apellido = apellido;
+                    empleado.Apellido.Data = apellido;
                 if (cedula != null)
-                    empleado.Cedula = cedula;
+                    empleado.Cedula.Data = cedula;
                 if (domicilio != null)
-                    empleado.Domicilio = domicilio;
+                    empleado.Domicilio.Data = domicilio;
                 if (telefono != null)
-                    empleado.Telefono = telefono;
+                    empleado.Contacto.Telefono1.Data = telefono;
                 empleado.Horario = horario;
 
                 _context.Empleados.Update(empleado);

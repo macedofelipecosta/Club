@@ -1,5 +1,5 @@
 ﻿using LogicaConexion.EntityFramework;
-using LogicaNegocio.Entidades;
+using LogicaNegocio.ValueObject;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using System;
 using System.Collections.Generic;

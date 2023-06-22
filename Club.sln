@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33627.172
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApp", "WebApp\WebApp.csproj", "{37E104DB-697B-4A31-8116-0539AB92CFBB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogicaNegocio", "LogicaNegocio\LogicaNegocio.csproj", "{DF0F6B9C-981C-4B6F-99CD-E595D29017E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogicaNegocio", "LogicaNegocio\LogicaNegocio.csproj", "{DF0F6B9C-981C-4B6F-99CD-E595D29017E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogicaAplicacion", "LogicaAplicacion\LogicaAplicacion.csproj", "{36395A46-C442-449D-B58A-D103196A3298}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogicaAplicacion", "LogicaAplicacion\LogicaAplicacion.csproj", "{36395A46-C442-449D-B58A-D103196A3298}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogicaConexion", "LogicaConexion\LogicaConexion.csproj", "{1611535F-794A-4BFE-874D-9E2DB5677E3F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogicaConexion", "LogicaConexion\LogicaConexion.csproj", "{1611535F-794A-4BFE-874D-9E2DB5677E3F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi\WebApi.csproj", "{E4690EA9-0C71-4932-A244-D4800C89C734}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{37E104DB-697B-4A31-8116-0539AB92CFBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{37E104DB-697B-4A31-8116-0539AB92CFBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{37E104DB-697B-4A31-8116-0539AB92CFBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{37E104DB-697B-4A31-8116-0539AB92CFBB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DF0F6B9C-981C-4B6F-99CD-E595D29017E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DF0F6B9C-981C-4B6F-99CD-E595D29017E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF0F6B9C-981C-4B6F-99CD-E595D29017E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -33,6 +29,10 @@ Global
 		{1611535F-794A-4BFE-874D-9E2DB5677E3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1611535F-794A-4BFE-874D-9E2DB5677E3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1611535F-794A-4BFE-874D-9E2DB5677E3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4690EA9-0C71-4932-A244-D4800C89C734}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4690EA9-0C71-4932-A244-D4800C89C734}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4690EA9-0C71-4932-A244-D4800C89C734}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4690EA9-0C71-4932-A244-D4800C89C734}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

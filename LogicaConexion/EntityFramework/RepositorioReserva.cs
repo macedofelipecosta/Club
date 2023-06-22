@@ -30,11 +30,11 @@ namespace LogicaConexion.EntityFramework
                 throw new Exception("No se ha podido agregar la reserva!");
             }
         }
-        public void Remove(int numeroReserva)
+        public void Delete(Reserva obj)
         {
             try
             {
-                var reserva = GetById(numeroReserva);
+                var reserva = Get(obj.NumeroReserva);
                 _context.Remove(reserva);
                 _context.SaveChanges();
             }
@@ -43,14 +43,14 @@ namespace LogicaConexion.EntityFramework
                 throw new Exception (e.Message);
             }
         }
-        public void Edit(int numeroReserva, Actividad actividad, Sala sala, DateTime fecha)
+        public void Update(Reserva obj)
         {
             try
             {
-                var reserva = GetById(numeroReserva);
-                reserva.Actividad = actividad;
-                reserva.Sala = sala;
-                reserva.Fecha = fecha;
+                var reserva = Get(obj.NumeroReserva);
+                reserva.Actividad = obj.Actividad;
+                reserva.Sala = obj.Sala;
+                reserva.Fecha = obj.Fecha;
 
                 _context.Reservas.Update(reserva);
                 _context.SaveChanges();
@@ -60,7 +60,7 @@ namespace LogicaConexion.EntityFramework
                 throw new Exception(e.Message);
             }
         }
-        public Reserva GetById(int numeroReserva)
+        public Reserva Get(int numeroReserva)
         {
             try
             {

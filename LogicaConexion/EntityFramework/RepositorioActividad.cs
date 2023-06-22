@@ -31,18 +31,17 @@ namespace LogicaConexion.EntityFramework
                 throw new Exception (e.Message);
             }
         }
-
         public void Update(int id,string nombre,Horario horario, Profesor profesor, Sala sala )
         {
             try
             {
-                var actividad=GetById(id );
-                if (nombre != null) { nombre = actividad.Nombre; };
+                var actividad=Get(id );
+                if (nombre != null) { nombre = actividad.Nombre.Data; };
                 if (horario != null) { horario = actividad.Horario; };
                 if (profesor != null) { profesor = actividad.Profesor; };
                 if (sala != null) { sala = actividad.Sala; };
 
-                actividad.Nombre = nombre;
+                actividad.Nombre.Data = nombre;
                 actividad.Horario = horario;
                 actividad.Profesor = profesor;
                 actividad.Sala = sala;
@@ -60,7 +59,7 @@ namespace LogicaConexion.EntityFramework
         {
             try
             {
-                var actividad = GetById(obj.Id);
+                var actividad = Get(obj.Id);
                 _context.Actividades.Remove(actividad);
                 _context.SaveChanges();
             }
@@ -82,7 +81,7 @@ namespace LogicaConexion.EntityFramework
                 throw new Exception(e.Message);
             }
         }
-        public Actividad GetById(int id)
+        public Actividad Get(int id)
         {
             try
             {
@@ -96,7 +95,6 @@ namespace LogicaConexion.EntityFramework
             }
         }
 
-
-
+       
     }
 }

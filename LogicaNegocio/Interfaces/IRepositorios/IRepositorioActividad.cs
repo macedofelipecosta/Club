@@ -9,6 +9,10 @@ namespace LogicaNegocio.Interfaces.IRepositorios
 {
     public interface IRepositorioActividad : IRepositorio<Actividad>
     {
-
+        public Actividad Get(int id);
+        public void Add(Actividad obj);
+        //public void Update(Actividad obj);
+        public void Delete(Actividad obj);
+        public IEnumerable<Actividad> GetAll();
     }
 }

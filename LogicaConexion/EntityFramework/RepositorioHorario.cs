@@ -23,26 +23,25 @@ namespace LogicaConexion.EntityFramework
             {
                 _context.Horarios.Add(obj);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 throw new Exception("No se ha podido crear el horario!");
             }
         }
-        public void Remove(int id)
+        public void Delete(Horario obj)
         {
-            var horario = GetHorario(id);
+            var horario = Get(obj.Id);
             if (horario == null) throw new InvalidOperationException("No se ha podido eliminar este horario porque no se ha encontrado!");
             _context.Horarios.Remove(horario);
             _context.SaveChanges();
         }
-        public void Edit(int id, DateTime inicio, DateTime fin)
+        public void Update(Horario obj)
         {
             try
             {
-                ValidarHorario(inicio, fin);
-                var horario = GetHorario(id);
-                horario.Inicio = inicio;
-                horario.Fin = fin;
+                var horario = Get(obj.Id);
+                horario.Inicio = obj.Inicio;
+                horario.Fin = obj.Fin;
 
                 _context.Horarios.Update(horario);
                 _context.SaveChanges();
@@ -52,15 +51,7 @@ namespace LogicaConexion.EntityFramework
                 throw new Exception(e.Message);
             }
         }
-        private void ValidarHorario(DateTime inicio, DateTime fin)
-        {
-            if (inicio > fin) throw new ArgumentException("La hora de inicio no puede ser mayor a la de fin");
-            TimeSpan tiempo = inicio.Subtract(fin);
-            int minutos = (int)tiempo.TotalMinutes;
-            if (minutos < 40) throw new InvalidOperationException("La actividad debe ser mayor a 40 minutos!");
-        }
-
-        public Horario GetHorario(int id)
+        public Horario Get(int id)
         {
             try
             {
@@ -86,5 +77,7 @@ namespace LogicaConexion.EntityFramework
                 throw new Exception(e.Message);
             }
         }
+
+       
     }
 }

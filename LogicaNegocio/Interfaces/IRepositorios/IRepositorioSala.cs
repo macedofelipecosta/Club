@@ -1,4 +1,5 @@
-﻿using LogicaNegocio.Entidades.Instalaciones;
+﻿using LogicaNegocio.Entidades.Actividades;
+using LogicaNegocio.Entidades.Instalaciones;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,10 @@ namespace LogicaNegocio.Interfaces.IRepositorios
 {
     public interface IRepositorioSala : IRepositorio<Sala>
     {
-
+        public void Add(Sala obj);
+        public void Update(Sala obj);
+        public void Delete(Sala obj);
+        public void Get(int id);
+        public IEnumerable<Sala> GetAll();
     }
 }

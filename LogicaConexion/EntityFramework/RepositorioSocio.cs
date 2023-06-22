@@ -1,5 +1,6 @@
 ﻿using LogicaNegocio.Entidades;
 using LogicaNegocio.Interfaces.IRepositorios;
+using LogicaNegocio.ValueObject;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,27 +31,26 @@ namespace LogicaConexion.EntityFramework
             }
         }
 
-        public void Edit(int id, string nombre, string apellido, string email,
-                            string cedula, Mutualista mutualista, string domicilio, DateTime nacimiento)
+        public void Edit(Socio obj)
         {
             try
             {
-                var socio = GetById(id);
-                if (nombre == null) nombre = socio.Nombre;
-                if (apellido == null) apellido = socio.Apellido;
-                if (email == null) email = socio.Email;
-                if (cedula == null) cedula = socio.Cedula;
-                if (mutualista == null) mutualista = socio.Mutualista;
-                if (domicilio == null) domicilio = socio.Domicilio;
-                ValidarEdad(nacimiento);
+                var socio = Get(obj.Id);
+                if (obj.Nombre.Data == null) socio.Nombre.Data = socio.Nombre.Data;
+                if (obj.Apellido.Data == null) socio.Apellido.Data = socio.Apellido.Data;
+                if (obj.Email.Data == null) socio.Email.Data = socio.Email.Data;
+                if (obj.Cedula.Data == null) socio.Cedula.Data = socio.Cedula.Data;
+                if (obj.Mutualista == null) socio.Mutualista.Id = socio.Mutualista.Id;
+                if (obj.Domicilio.Data == null) socio.Domicilio.Data = socio.Domicilio.Data;
+                
 
-                socio.Nombre = nombre;
-                socio.Apellido = apellido;
-                socio.Email = email;
-                socio.Cedula = cedula;
-                socio.Mutualista = mutualista;
-                socio.Domicilio = domicilio;
-                socio.Nacimiento = nacimiento;
+                socio.Nombre.Data = obj.Nombre.Data;
+                socio.Apellido.Data = obj.Apellido.Data;
+                socio.Email.Data = obj.Email.Data;
+                socio.Cedula.Data = obj.Cedula.Data;
+                socio.Mutualista.Id = obj.Mutualista.Id;
+                socio.Domicilio.Data = obj.Domicilio.Data;
+                socio.Nacimiento.Data = obj.Nacimiento.Data;
 
                 _context.Socios.Update(socio);
                 _context.SaveChanges();
@@ -61,32 +61,14 @@ namespace LogicaConexion.EntityFramework
             }
         }
 
-        private void ValidarEdad(DateTime nacimiento)
+        
+
+
+        public void Delete(Socio obj)
         {
             try
             {
-                int edad = nacimiento.Year - DateTime.Now.Year;
-                if (edad > 110)
-                {
-                    throw new Exception("La edad no es válida, debe ser menor a 110 años!");
-                }
-                if (edad<1)
-                {
-                    throw new Exception("La edad no es válida, debe ser mayor a 1 año!");
-                }
-            }
-            catch (Exception e)
-            {
-                throw new Exception (e.Message);
-            }
-        }
-
-
-        public void Remove(int id)
-        {
-            try
-            {
-                var socio = GetById(id);
+                var socio = Get(obj.Id);
                 if (socio == null) throw new Exception($"No se ha podido borrar al socio Nro {id}");
                 _context.Socios.Remove(socio);
                 _context.SaveChanges();
@@ -109,7 +91,8 @@ namespace LogicaConexion.EntityFramework
             }
 
         }
-        public Socio GetById(int id)
+
+        public Socio Get(int id)
         {
             try
             {

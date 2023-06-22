@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using LogicaNegocio.ValueObject;
 
 namespace LogicaNegocio.Entidades.Empleados
 {
     public class Profesor : Personal
     {
-        public string Profesion { get; set; }
+        public Profesion Profesion { get; set; }
     }
 }
