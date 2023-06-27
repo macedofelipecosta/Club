@@ -2,9 +2,9 @@
 using LogicaNegocio.Interfaces.IRepositorios;
 using Microsoft.IdentityModel.Tokens;
 
-namespace LogicaConexion.EntityFramework
+namespace LogicaConexion.EntityFramework.Repositorios
 {
-    public class RepositorioAdministrador:IRepositorioAdministrador
+    public class RepositorioAdministrador : IRepositorioAdministrador
     {
         private ClubContext _context;
 
@@ -59,7 +59,7 @@ namespace LogicaConexion.EntityFramework
         {
             try
             {
-                var admins= _context.Administradores.ToList();
+                var admins = _context.Administradores.ToList();
                 if (admins.IsNullOrEmpty()) throw new Exception("No se han encontrado administradores");
                 return admins;
             }

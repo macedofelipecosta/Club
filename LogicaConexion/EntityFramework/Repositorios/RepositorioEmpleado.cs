@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LogicaConexion.EntityFramework
+namespace LogicaConexion.EntityFramework.Repositorios
 {
     public class RepositorioPersonal : IRepositorioPersonal
     {

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LogicaConexion.EntityFramework
+namespace LogicaConexion.EntityFramework.Repositorios
 {
     public class RepositorioSocio : IRepositorioSocio
     {
@@ -42,7 +42,7 @@ namespace LogicaConexion.EntityFramework
                 if (obj.Cedula.Data == null) socio.Cedula.Data = socio.Cedula.Data;
                 if (obj.Mutualista == null) socio.Mutualista.Id = socio.Mutualista.Id;
                 if (obj.Domicilio.Data == null) socio.Domicilio.Data = socio.Domicilio.Data;
-                
+
 
                 socio.Nombre.Data = obj.Nombre.Data;
                 socio.Apellido.Data = obj.Apellido.Data;
@@ -61,7 +61,7 @@ namespace LogicaConexion.EntityFramework
             }
         }
 
-        
+
 
 
         public void Delete(Socio obj)

@@ -9,7 +9,7 @@ using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LogicaConexion.EntityFramework
+namespace LogicaConexion.EntityFramework.Repositorios
 {
     public class RepositorioReserva : IRepositorioReserva
     {
@@ -40,7 +40,7 @@ namespace LogicaConexion.EntityFramework
             }
             catch (Exception e)
             {
-                throw new Exception (e.Message);
+                throw new Exception(e.Message);
             }
         }
         public void Update(Reserva obj)

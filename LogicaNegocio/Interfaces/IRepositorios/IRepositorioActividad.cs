@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LogicaNegocio.Interfaces.IRepositorios
 {
-    public class IRepositorioActividades : IRepositorio<Actividad>
+    public class IRepositorioActividad : IRepositorio<Actividad>
     {
         public void Add(Actividad obj)
         {

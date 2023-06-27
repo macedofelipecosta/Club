@@ -1,10 +1,11 @@
-﻿using System;
+﻿using LogicaNegocio.ValueObject;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LogicaNegocio.ValueObject
+namespace LogicaNegocio.Entidades
 {
     public class Mutualista
     {
@@ -12,5 +13,9 @@ namespace LogicaNegocio.ValueObject
         public Nombre Name { get; set; }
         public Telefono Telefono { get; set; }
         public Emergencia Emergencia { get; set; }
+
+        public Mutualista()
+        {
+        }
     }
 }

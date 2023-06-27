@@ -9,9 +9,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LogicaConexion.EntityFramework
+namespace LogicaConexion.EntityFramework.Repositorios
 {
-    public class RepositorioActividad : IRepositorioActividades
+    public class RepositorioActividad : IRepositorioActividad
     {
         private ClubContext _context;
         public RepositorioActividad(ClubContext context)
@@ -28,14 +28,14 @@ namespace LogicaConexion.EntityFramework
             }
             catch (Exception e)
             {
-                throw new Exception (e.Message);
+                throw new Exception(e.Message);
             }
         }
-        public void Update(int id,string nombre,Horario horario, Profesor profesor, Sala sala )
+        public void Update(int id, string nombre, Horario horario, Profesor profesor, Sala sala)
         {
             try
             {
-                var actividad=Get(id );
+                var actividad = Get(id);
                 if (nombre != null) { nombre = actividad.Nombre.Data; };
                 if (horario != null) { horario = actividad.Horario; };
                 if (profesor != null) { profesor = actividad.Profesor; };
@@ -51,7 +51,7 @@ namespace LogicaConexion.EntityFramework
             }
             catch (Exception e)
             {
-                throw new Exception (e.Message);
+                throw new Exception(e.Message);
             }
 
         }
