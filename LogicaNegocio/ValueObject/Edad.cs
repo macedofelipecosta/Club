@@ -12,22 +12,37 @@ namespace LogicaNegocio.ValueObject
             get { return _data; }
             set
             {
-                BirthValidation();
+                AgeValidation(value);
                 _data = value;
             }
         }
 
-        private void BirthValidation()
+        public Edad(int data)
+        {
+            Data = data;
+        }
+
+        private void AgeValidation(int age)
         {
             try
             {
-                DateTime today = DateTime.Now;
-                int age = today.Year - _data;
-                if (age <= 0 || age > 100) throw new AgeVOExeption("El socio debe ser mayor de 0 años y menor de 101 años!");
+                if (age > 110)
+                {
+                    throw new AgeVOExeption("La edad no es válida, debe ser menor a 110 años!");
+                }
+                if (age < 1)
+                {
+                    throw new AgeVOExeption("La edad no es válida, debe ser mayor a 1 año!");
+                }
             }
-            catch (AgeVOExeption e) { throw new AgeVOExeption(e.Message); }
-            catch (Exception) { throw new AgeVOExeption("Ha ocurrido un error inesperado!"); };
+            catch (AgeVOExeption e)
+            {
+                throw new AgeVOExeption(e.Message);
+            }
         }
+
+
+        
 
     }
 }

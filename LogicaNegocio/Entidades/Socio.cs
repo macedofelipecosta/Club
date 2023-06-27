@@ -1,5 +1,6 @@
 ﻿using LogicaNegocio.Excepciones;
 using LogicaNegocio.ValueObject;
+using LogicaNegocio.ValueObject.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace LogicaNegocio.Entidades
         public Nombre Nombre { get; set; }
         public Nombre Apellido { get; set; }
         public Fecha Nacimiento { get; set; }
-        public Edad Edad { get; }
+        public Edad Edad { get; private set; }
         public Mutualista Mutualista { get; set; }
         public Domicilio Domicilio { get; set; }
         public Email Email { get; set; }
@@ -26,28 +27,27 @@ namespace LogicaNegocio.Entidades
 
         public Socio()
         {
-            ValidarEdad(this.Nacimiento.Data);
+            AgeAssign(this.Nacimiento.Data);
         }
 
 
-        private void ValidarEdad(DateTime nacimiento)
+        private void AgeAssign(DateTime nacimiento)
         {
             try
             {
-                int edad = nacimiento.Year - DateTime.Now.Year;
-                if (edad > 110)
+                int age = nacimiento.Year - DateTime.Now.Year;
+                if (age > 110)
                 {
-                    throw new Exception("La edad no es válida, debe ser menor a 110 años!");
+                    throw new SocioAgeException("La edad no es válida, debe ser menor a 110 años!");
                 }
-                if (edad < 1)
+                if (age < 1)
                 {
-                    throw new Exception("La edad no es válida, debe ser mayor a 1 año!");
+                    throw new SocioAgeException("La edad no es válida, debe ser mayor a 1 año!");
                 }
+                Edad = new Edad(age);
             }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
+            catch (AgeVOExeption e) { throw new SocioAgeException(e.Message); }
+            catch (SocioAgeException e) { throw new SocioAgeException(e.Message); }
         }
 
 
