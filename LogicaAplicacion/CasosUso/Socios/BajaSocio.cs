@@ -19,7 +19,7 @@ namespace LogicaAplicacion.CasosUso.Socios
 
         public void EliminarSocio(Socio obj)
         {
-            _repositorioSocio.Remove(obj.Id);
+            _repositorioSocio.Delete(obj);
         }
     }
 }

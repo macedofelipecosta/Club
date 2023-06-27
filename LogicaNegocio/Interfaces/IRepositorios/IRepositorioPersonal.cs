@@ -1,5 +1,4 @@
-﻿using LogicaNegocio.Entidades;
-using LogicaNegocio.Entidades.Empleados;
+﻿using LogicaNegocio.Entidades.Empleados;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,12 +7,31 @@ using System.Threading.Tasks;
 
 namespace LogicaNegocio.Interfaces.IRepositorios
 {
-    public interface IRepositorioPersonal : IRepositorio<Personal>
+    public class IRepositorioPersonal : IRepositorio<Personal>
     {
-        public void Add(Personal obj);
-        public void Update(Personal obj);
-        public void Delete(Personal obj);
-        public void Get(int id);
-        public IEnumerable<Personal> GetAll();
+        public void Add(Personal obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(Personal obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Personal Get(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Personal> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(Personal obj)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

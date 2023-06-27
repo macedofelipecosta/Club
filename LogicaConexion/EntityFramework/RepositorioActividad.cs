@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace LogicaConexion.EntityFramework
 {
-    public class RepositorioActividad : IRepositorioActividad
+    public class RepositorioActividad : IRepositorioActividades
     {
         private ClubContext _context;
         public RepositorioActividad(ClubContext context)
@@ -95,6 +95,9 @@ namespace LogicaConexion.EntityFramework
             }
         }
 
-       
+        public void Update(Actividad obj)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

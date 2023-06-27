@@ -1,4 +1,5 @@
 ﻿using LogicaConexion.EntityFramework;
+using LogicaNegocio.Entidades;
 using LogicaNegocio.ValueObject;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using System;
@@ -18,12 +19,11 @@ namespace LogicaAplicacion.CasosUso.Administrador
             _repositorioSocio = repositorioSocio;
         }
 
-        public void EditSocio(int id, string nombre, string apellido, string email,
-                            string cedula, Mutualista mutualista, string domicilio, DateTime nacimiento)
+        public void EditSocio(Socio obj)
         {
             try
             {
-                _repositorioSocio.Edit(id,nombre,apellido,email,cedula,mutualista,domicilio,nacimiento);
+                _repositorioSocio.Edit(obj);
             }
             catch (Exception e)
             {

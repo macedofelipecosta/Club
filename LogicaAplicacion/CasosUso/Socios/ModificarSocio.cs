@@ -21,7 +21,7 @@ namespace LogicaAplicacion.CasosUso.Socios
         {
             try
             {
-                _repositorioSocio.Edit();
+                _repositorioSocio.Edit(obj);
             }
             catch (Exception e)
             {

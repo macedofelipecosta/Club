@@ -1,5 +1,4 @@
-﻿using LogicaNegocio.Entidades.Actividades;
-using LogicaNegocio.Entidades.Instalaciones;
+﻿using LogicaNegocio.Entidades.Instalaciones;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,12 +7,31 @@ using System.Threading.Tasks;
 
 namespace LogicaNegocio.Interfaces.IRepositorios
 {
-    public interface IRepositorioSala : IRepositorio<Sala>
+    public class IRepositorioSala : IRepositorio<Sala>
     {
-        public void Add(Sala obj);
-        public void Update(Sala obj);
-        public void Delete(Sala obj);
-        public void Get(int id);
-        public IEnumerable<Sala> GetAll();
+        public void Add(Sala obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(Sala obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Sala Get(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Sala> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(Sala obj)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

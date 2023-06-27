@@ -1,5 +1,4 @@
 ﻿using LogicaNegocio.Entidades.Actividades;
-using LogicaNegocio.Entidades.Instalaciones;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,12 +7,31 @@ using System.Threading.Tasks;
 
 namespace LogicaNegocio.Interfaces.IRepositorios
 {
-    public interface IRepositorioHorario : IRepositorio<Horario>
+    public class IRepositorioHorario : IRepositorio<Horario>
     {
-        public void Add(Horario obj);
-        public void Update(Horario obj);
-        public void Delete(Horario obj);
-        public Horario Get(int id);
-        public IEnumerable<Horario> GetAll();
+        public void Add(Horario obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(Horario obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Horario Get(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Horario> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(Horario obj)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

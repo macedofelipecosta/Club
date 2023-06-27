@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LogicaNegocio.Entidades.Empleados
+namespace LogicaNegocio.Entidades
 {
     public class Administrador
     {

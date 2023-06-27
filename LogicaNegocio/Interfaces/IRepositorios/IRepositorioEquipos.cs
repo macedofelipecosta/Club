@@ -1,4 +1,4 @@
-﻿using LogicaNegocio.Entidades.Actividades;
+﻿using LogicaNegocio.Entidades.Instalaciones;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,29 +7,29 @@ using System.Threading.Tasks;
 
 namespace LogicaNegocio.Interfaces.IRepositorios
 {
-    public class IRepositorioReserva : IRepositorio<Reserva>
+    public class IRepositorioEquipos : IRepositorio<Equipo>
     {
-        public void Add(Reserva obj)
+        public void Add(Equipo obj)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(Reserva obj)
+        public void Delete(Equipo obj)
         {
             throw new NotImplementedException();
         }
 
-        public Reserva Get(int id)
+        public Equipo Get(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Reserva> GetAll()
+        public IEnumerable<Equipo> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public void Update(Reserva obj)
+        public void Update(Equipo obj)
         {
             throw new NotImplementedException();
         }

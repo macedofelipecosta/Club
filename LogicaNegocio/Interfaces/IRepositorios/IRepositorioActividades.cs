@@ -7,29 +7,29 @@ using System.Threading.Tasks;
 
 namespace LogicaNegocio.Interfaces.IRepositorios
 {
-    public class IRepositorioReserva : IRepositorio<Reserva>
+    public class IRepositorioActividades : IRepositorio<Actividad>
     {
-        public void Add(Reserva obj)
+        public void Add(Actividad obj)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(Reserva obj)
+        public void Delete(Actividad obj)
         {
             throw new NotImplementedException();
         }
 
-        public Reserva Get(int id)
+        public Actividad Get(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Reserva> GetAll()
+        public IEnumerable<Actividad> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public void Update(Reserva obj)
+        public void Update(Actividad obj)
         {
             throw new NotImplementedException();
         }

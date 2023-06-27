@@ -69,7 +69,7 @@ namespace LogicaConexion.EntityFramework
             try
             {
                 var socio = Get(obj.Id);
-                if (socio == null) throw new Exception($"No se ha podido borrar al socio Nro {id}");
+                if (socio == null) throw new Exception($"No se ha podido borrar al socio Nro {obj.Id}");
                 _context.Socios.Remove(socio);
                 _context.SaveChanges();
             }

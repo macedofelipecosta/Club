@@ -1,4 +1,4 @@
-﻿using LogicaNegocio.Entidades.Empleados;
+﻿using LogicaNegocio.Entidades;
 using LogicaNegocio.Interfaces.IRepositorios;
 using Microsoft.IdentityModel.Tokens;
 
