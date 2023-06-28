@@ -18,6 +18,7 @@ namespace LogicaConexion.EntityFramework
         public DbSet<Equipo> Equipos { get; set; }
         public DbSet<Sala> Salas { get; set; }
         public DbSet<Administrador> Administradores { get; set; }
+        public DbSet<Mutualista> Mutualistas { get; set; }
 
 
         public ClubContext(DbContextOptions options) : base(options) { }
