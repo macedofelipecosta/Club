@@ -1,4 +1,5 @@
-﻿using LogicaNegocio.Entidades.Actividades;
+﻿using LogicaConexion.EntityFramework.Exceptions;
+using LogicaNegocio.Entidades.Actividades;
 using LogicaNegocio.Entidades.Instalaciones;
 using LogicaNegocio.Interfaces.IRepositorios;
 using Microsoft.IdentityModel.Tokens;
@@ -23,12 +24,12 @@ namespace LogicaConexion.EntityFramework.Repositorios
         {
             try
             {
+                if (obj == null) { throw new ArgumentNullException("No se ha recibido ningun objeto para agregar a la base de datos!"); }
                 _context.Reservas.Add(obj);
+                _context.SaveChanges();
             }
-            catch (Exception)
-            {
-                throw new Exception("No se ha podido agregar la reserva!");
-            }
+            catch (ArgumentNullException e) { throw new RepositorioReservaException(e.Message); }
+            catch (Exception) { throw new RepositorioReservaException("Ha ocurrido un error inesperado!"); }
         }
         public void Delete(Reserva obj)
         {
@@ -38,53 +39,45 @@ namespace LogicaConexion.EntityFramework.Repositorios
                 _context.Remove(reserva);
                 _context.SaveChanges();
             }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
+            catch (RepositorioReservaException e) { throw new RepositorioReservaException(e.Message); }
+            catch (Exception) { throw new RepositorioReservaException("Ha ocurrido un error inesperado!"); }
         }
         public void Update(Reserva obj)
         {
             try
             {
                 var reserva = Get(obj.NumeroReserva);
-                reserva.Actividad = obj.Actividad;
-                reserva.Sala = obj.Sala;
-                reserva.Fecha = obj.Fecha;
-
+                if (obj.Actividad.Id != null) { reserva.Actividad.Id = obj.Actividad.Id; }
+                if (obj.Sala.Id != null) { reserva.Sala.Id = obj.Sala.Id;}
+                if(obj.Fecha!=null) { reserva.Fecha=obj.Fecha;}
+                
                 _context.Reservas.Update(reserva);
                 _context.SaveChanges();
             }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
+            catch (RepositorioReservaException e) { throw new RepositorioReservaException(e.Message); }
+            catch (Exception) { throw new RepositorioReservaException("Ha ocurrido un error inesperado!"); }
         }
         public Reserva Get(int numeroReserva)
         {
             try
             {
                 var reserva = _context.Reservas.FirstOrDefault(X => X.NumeroReserva == numeroReserva);
-                if (reserva == null) throw new Exception("No se han encontrado reservas con este número!");
+                if (reserva == null) throw new InvalidOperationException("No se han encontrado reservas con este número!");
                 return reserva;
             }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
+            catch (InvalidOperationException e){throw new RepositorioReservaException(e.Message);}
+            catch (Exception) { throw new RepositorioReservaException("Ha ocurrido un error inesperado!"); }
         }
         public IEnumerable<Reserva> GetAll()
         {
             try
             {
                 var list = _context.Reservas.ToList();
-                if (list.IsNullOrEmpty()) throw new Exception("No se han encontrado reservas!");
+                if (list.IsNullOrEmpty()) throw new InvalidOperationException("No se han encontrado reservas en la base de datos!");
                 return list;
             }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
+            catch (InvalidOperationException e) { throw new RepositorioReservaException(e.Message); }
+            catch (Exception) { throw new RepositorioReservaException("Ha ocurrido un error inesperado!"); }
         }
     }
 }
