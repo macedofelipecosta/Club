@@ -12,6 +12,6 @@ namespace LogicaNegocio.Entidades.Instalaciones
         public int Id { get; set; }
         public Nombre Nombre { get; set; }
         public Observaciones Descripcion { get; set;}
-        public IEnumerable<Equipo> Equipo { get; set; }
+        
     }
 }
