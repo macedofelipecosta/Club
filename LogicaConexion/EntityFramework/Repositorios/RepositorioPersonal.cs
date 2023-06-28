@@ -1,4 +1,5 @@
-﻿using LogicaNegocio.Entidades.Actividades;
+﻿using LogicaConexion.EntityFramework.Exceptions;
+using LogicaNegocio.Entidades.Actividades;
 using LogicaNegocio.Entidades.Empleados;
 using LogicaNegocio.Interfaces.IRepositorios;
 using LogicaNegocio.ValueObject;
@@ -24,21 +25,27 @@ namespace LogicaConexion.EntityFramework.Repositorios
         {
             try
             {
+                if (obj == null) { throw new ArgumentNullException(nameof(obj)); }
                 _context.Empleados.Add(obj);
                 _context.SaveChanges();
             }
-            catch (Exception)
-            {
-                throw;
-            }
+            catch (ArgumentNullException e) { throw new RepositorioPersonalException(e.Message); }
+            catch (Exception) { throw new RepositorioPersonalException("Ha ocurrido un error inesperado!"); }
         }
 
         public Personal Get(int id)
         {
-            var empleado = _context.Empleados.FirstOrDefault(X => X.Id == id);
-            if (empleado == null) throw new InvalidOperationException($"No se ha encontrado al empleado con id: {id}");
-            return empleado;
+            try
+            {
+                var empleado = _context.Empleados.FirstOrDefault(X => X.Id == id);
+                if (empleado == null) throw new InvalidOperationException($"No se ha encontrado al empleado con id: {id}");
+                return empleado;
+            }
+            catch (InvalidOperationException e) { throw new RepositorioPersonalException(e.Message); }
+            catch (Exception) { throw new RepositorioPersonalException("Ha ocurrido un error inesperado!"); }
+
         }
+
         public IEnumerable<Personal> GetAll()
         {
             try
@@ -47,31 +54,21 @@ namespace LogicaConexion.EntityFramework.Repositorios
                 if (list.IsNullOrEmpty()) throw new InvalidOperationException("No se han encontrado empleados!");
                 return list;
             }
-            catch (Exception)
-            {
-                throw;
-            }
+            catch (InvalidOperationException e) { throw new RepositorioPersonalException(e.Message); }
+            catch (Exception) { throw new RepositorioPersonalException("Ha ocurrido un error inesperado!"); }
         }
 
         public void Delete(Personal obj)
         {
-            var empleado = GetById(obj.Id);
-            if (empleado != null)
+            try
             {
-                try
-                {
-                    _context.Empleados.Remove(empleado);
-                    _context.SaveChanges();
-                }
-                catch (Exception)
-                {
-                    throw new InvalidOperationException("No se ha podido eliminar al empleado!");
-                }
+                var empleado = Get(obj.Id);
+                _context.Empleados.Remove(empleado);
+                _context.SaveChanges();
+
             }
-            else
-            {
-                throw new InvalidOperationException("No se ha encontrado al empleado!");
-            }
+            catch (RepositorioPersonalException e){throw new RepositorioPersonalException(e.Message);}
+            catch (Exception) { throw new RepositorioPersonalException("Ha ocurrido un error inesperado!"); }
         }
 
 
@@ -80,22 +77,17 @@ namespace LogicaConexion.EntityFramework.Repositorios
             try
             {
                 var personal = Get(obj.Id);
-                if (personal == null) throw new Exception($"No se ha encontrado la actividad con id {obj.Id}");
                 if (obj.Name.Data != null) { personal.Name.Data = obj.Name.Data; };
                 if (obj.Apellido.Data != null) { personal.Apellido.Data = obj.Apellido.Data; };
-                if (obj.Cedula != null) { personal.Cedula.Data=obj.Cedula.Data; };
+                if (obj.Cedula != null) { personal.Cedula.Data = obj.Cedula.Data; };
                 if (obj.Domicilio.Data != null) { personal.Domicilio.Data = obj.Domicilio.Data; };
                 if (obj.Contacto != null) { personal.Contacto.Telefono1.Data = obj.Contacto.Telefono1.Data; };
                 if (obj.Horario != null) { personal.Horario.Id = obj.Horario.Id; };
-
-
                 _context.Empleados.Update(personal);
                 _context.SaveChanges();
             }
-            catch (Exception)
-            {
-                throw;
-            }
+            catch (RepositorioPersonalException e) { throw new RepositorioPersonalException(e.Message); }
+            catch (Exception) { throw new RepositorioPersonalException("Ha ocurrido un error inesperado!"); }
         }
     }
 }
