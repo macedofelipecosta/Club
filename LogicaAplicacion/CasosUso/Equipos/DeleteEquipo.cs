@@ -1,5 +1,6 @@
 ﻿using LogicaAplicacion.Exceptions.Equipos;
 using LogicaAplicacion.Interfaces;
+using LogicaConexion.EntityFramework.Exceptions;
 using LogicaConexion.EntityFramework.Repositorios;
 using LogicaNegocio.Entidades.Instalaciones;
 using System;
@@ -25,10 +26,11 @@ namespace LogicaAplicacion.CasosUso.Equipos
             {
                 _repo.Delete(obj);
             }
+            catch (RepositorioEquipoException e) { throw new DeleteEquipoLAException(e.Message); }
             catch (Exception)
             {
 
-                throw new DeleteEquipoLAException("Ha ocurrido un error inesperado") ;
+                throw new DeleteEquipoLAException("Ha ocurrido un error inesperado");
             }
         }
     }

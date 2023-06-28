@@ -1,4 +1,5 @@
-﻿using LogicaNegocio.Entidades.Actividades;
+﻿using LogicaConexion.EntityFramework.Exceptions;
+using LogicaNegocio.Entidades.Actividades;
 using LogicaNegocio.Interfaces.IRepositorios;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -25,15 +26,23 @@ namespace LogicaConexion.EntityFramework.Repositorios
             }
             catch (Exception)
             {
-                throw new Exception("No se ha podido crear el horario!");
+                throw new RepositorioHorarioException("No se ha podido crear el horario!");
             }
         }
         public void Delete(Horario obj)
         {
-            var horario = Get(obj.Id);
-            if (horario == null) throw new InvalidOperationException("No se ha podido eliminar este horario porque no se ha encontrado!");
-            _context.Horarios.Remove(horario);
-            _context.SaveChanges();
+            try
+            {
+                var horario = Get(obj.Id);
+                _context.Horarios.Remove(horario);
+                _context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+
+                throw new RepositorioHorarioException(e.Message);
+            }
+
         }
         public void Update(Horario obj)
         {
@@ -42,13 +51,12 @@ namespace LogicaConexion.EntityFramework.Repositorios
                 var horario = Get(obj.Id);
                 horario.Inicio = obj.Inicio;
                 horario.Fin = obj.Fin;
-
                 _context.Horarios.Update(horario);
                 _context.SaveChanges();
             }
             catch (Exception e)
             {
-                throw new Exception(e.Message);
+                throw new RepositorioHorarioException(e.Message);
             }
         }
         public Horario Get(int id)
@@ -56,12 +64,12 @@ namespace LogicaConexion.EntityFramework.Repositorios
             try
             {
                 var horario = _context.Horarios.FirstOrDefault(x => x.Id == id);
-                if (horario == null) throw new Exception("No se ha encnotrado el horario!");
+                if (horario == null) throw new KeyNotFoundException("No se ha encnotrado el horario!");
                 return horario;
             }
             catch (Exception e)
             {
-                throw new Exception(e.Message);
+                throw new RepositorioHorarioException(e.Message);
             }
         }
         public IEnumerable<Horario> GetAll()
@@ -74,7 +82,7 @@ namespace LogicaConexion.EntityFramework.Repositorios
             }
             catch (Exception e)
             {
-                throw new Exception(e.Message);
+                throw new RepositorioHorarioException(e.Message);
             }
         }
 

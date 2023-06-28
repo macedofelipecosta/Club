@@ -1,5 +1,6 @@
 ﻿using LogicaAplicacion.Exceptions.Equipos;
 using LogicaAplicacion.Interfaces;
+using LogicaConexion.EntityFramework.Exceptions;
 using LogicaConexion.EntityFramework.Repositorios;
 using LogicaNegocio.Entidades.Instalaciones;
 using System;
@@ -25,6 +26,7 @@ namespace LogicaAplicacion.CasosUso.Equipos
             {
                 _repo.Update(obj);
             }
+            catch (RepositorioEquipoException e) { throw new DeleteEquipoLAException(e.Message); }
             catch (Exception)
             {
 
