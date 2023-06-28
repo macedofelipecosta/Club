@@ -1,4 +1,8 @@
-﻿using System;
+﻿using LogicaAplicacion.Exceptions.Equipos;
+using LogicaAplicacion.Interfaces;
+using LogicaConexion.EntityFramework.Repositorios;
+using LogicaNegocio.Entidades.Instalaciones;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +10,26 @@ using System.Threading.Tasks;
 
 namespace LogicaAplicacion.CasosUso.Equipos
 {
-    internal class UpdateEquipo
+    public class UpdateEquipo : UpdateObject<Equipo>
     {
+        RepositorioEquipo _repo;
+
+        public UpdateEquipo(RepositorioEquipo repo)
+        {
+            _repo = repo;
+        }
+
+        public void UpdateObj(Equipo obj)
+        {
+            try
+            {
+                _repo.Update(obj);
+            }
+            catch (Exception)
+            {
+
+                throw new UpdateEquipoLAException ("Ha ocurrido un error inesperado");
+            }
+        }
     }
 }
