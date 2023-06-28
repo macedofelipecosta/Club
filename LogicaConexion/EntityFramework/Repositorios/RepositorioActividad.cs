@@ -2,6 +2,7 @@
 using LogicaNegocio.Entidades.Empleados;
 using LogicaNegocio.Entidades.Instalaciones;
 using LogicaNegocio.Interfaces.IRepositorios;
+using LogicaNegocio.ValueObject;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -31,36 +32,37 @@ namespace LogicaConexion.EntityFramework.Repositorios
                 throw new Exception(e.Message);
             }
         }
-        public void Update(int id, string nombre, Horario horario, Profesor profesor, Sala sala)
-        {
-            try
-            {
-                var actividad = Get(id);
-                if (nombre != null) { nombre = actividad.Nombre.Data; };
-                if (horario != null) { horario = actividad.Horario; };
-                if (profesor != null) { profesor = actividad.Profesor; };
-                if (sala != null) { sala = actividad.Sala; };
-
-                actividad.Nombre.Data = nombre;
-                actividad.Horario = horario;
-                actividad.Profesor = profesor;
-                actividad.Sala = sala;
-
-                _context.Actividades.Update(actividad);
-                _context.SaveChanges();
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-
-        }
+      
         public void Delete(Actividad obj)
         {
             try
             {
                 var actividad = Get(obj.Id);
                 _context.Actividades.Remove(actividad);
+                _context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+        public void Update(Actividad obj)
+        {
+            try
+            {
+                var actividad = Get(obj.Id);
+                if (actividad == null) throw new Exception($"No se ha encontrado la actividad con id {obj.Id}");
+                if (obj.Nombre.Data == null) { throw new Exception($"No se ha encontrado un nombre para modificar"); };
+                if (obj.Horario.Id == null) { throw new Exception($"No se han encontrado un horario para modificar"); };
+                if (obj.Profesor.Id == null) { throw new Exception($"No se han encontrado profesor para modificar"); };
+                if (obj.Sala.Id == null) { throw new Exception($"No se han encontrado sala para modificar"); };
+
+                actividad.Nombre.Data = obj.Nombre.Data;
+                actividad.Horario.Id = obj.Horario.Id;
+                actividad.Profesor.Id = obj.Profesor.Id;
+                actividad.Sala.Id = obj.Sala.Id;
+
+                _context.Actividades.Update(actividad);
                 _context.SaveChanges();
             }
             catch (Exception e)
@@ -95,9 +97,6 @@ namespace LogicaConexion.EntityFramework.Repositorios
             }
         }
 
-        public void Update(Actividad obj)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

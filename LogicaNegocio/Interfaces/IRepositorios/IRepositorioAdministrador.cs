@@ -7,31 +7,16 @@ using System.Threading.Tasks;
 
 namespace LogicaNegocio.Interfaces.IRepositorios
 {
-    public class IRepositorioAdministrador : IRepositorio<Administrador>
+    public interface IRepositorioAdministrador : IRepositorio<Administrador>
     {
-        public void Add(Administrador obj)
-        {
-            throw new NotImplementedException();
-        }
+        public void Add(Administrador obj);
 
-        public void Delete(Administrador obj)
-        {
-            throw new NotImplementedException();
-        }
+        public void Delete(Administrador obj);
 
-        public Administrador Get(int id)
-        {
-            throw new NotImplementedException();
-        }
+        public Administrador Get(int id);
 
-        public IEnumerable<Administrador> GetAll()
-        {
-            throw new NotImplementedException();
-        }
+        public IEnumerable<Administrador> GetAll();
 
-        public void Update(Administrador obj)
-        {
-            throw new NotImplementedException();
-        }
+        public void Update(Administrador obj);
     }
 }

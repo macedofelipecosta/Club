@@ -7,31 +7,16 @@ using System.Threading.Tasks;
 
 namespace LogicaNegocio.Interfaces.IRepositorios
 {
-    public class IRepositorioHorario : IRepositorio<Horario>
+    public interface IRepositorioHorario : IRepositorio<Horario>
     {
-        public void Add(Horario obj)
-        {
-            throw new NotImplementedException();
-        }
+        public void Add(Horario obj);
 
-        public void Delete(Horario obj)
-        {
-            throw new NotImplementedException();
-        }
+        public void Delete(Horario obj);
+        
+        public Horario Get(int id);
 
-        public Horario Get(int id)
-        {
-            throw new NotImplementedException();
-        }
+        public IEnumerable<Horario> GetAll();
 
-        public IEnumerable<Horario> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(Horario obj)
-        {
-            throw new NotImplementedException();
-        }
+        public void Update(Horario obj);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using LogicaNegocio.Entidades.Actividades;
 using LogicaNegocio.Entidades.Empleados;
 using LogicaNegocio.Interfaces.IRepositorios;
+using LogicaNegocio.ValueObject;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -32,54 +33,7 @@ namespace LogicaConexion.EntityFramework.Repositorios
             }
         }
 
-        public void Update(int id, string nombre, string apellido, string cedula,
-                            string domicilio, string telefono, Horario horario)
-        {
-            try
-            {
-                var empleado = GetById(id);
-                if (nombre != null)
-                    empleado.Name.Data = nombre;
-                if (apellido != null)
-                    empleado.Apellido.Data = apellido;
-                if (cedula != null)
-                    empleado.Cedula.Data = cedula;
-                if (domicilio != null)
-                    empleado.Domicilio.Data = domicilio;
-                if (telefono != null)
-                    empleado.Contacto.Telefono1.Data = telefono;
-                empleado.Horario = horario;
-
-                _context.Empleados.Update(empleado);
-                _context.SaveChanges();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        public void Delete(int id)
-        {
-            var empleado = GetById(id);
-            if (empleado != null)
-            {
-                try
-                {
-                    _context.Empleados.Remove(empleado);
-                    _context.SaveChanges();
-                }
-                catch (Exception)
-                {
-                    throw new InvalidOperationException("No se ha podido eliminar al empleado!");
-                }
-            }
-            else
-            {
-                throw new InvalidOperationException("No se ha encontrado al empleado!");
-            }
-        }
-        public Personal GetById(int id)
+        public Personal Get(int id)
         {
             var empleado = _context.Empleados.FirstOrDefault(X => X.Id == id);
             if (empleado == null) throw new InvalidOperationException($"No se ha encontrado al empleado con id: {id}");
@@ -99,5 +53,49 @@ namespace LogicaConexion.EntityFramework.Repositorios
             }
         }
 
+        public void Delete(Personal obj)
+        {
+            var empleado = GetById(obj.Id);
+            if (empleado != null)
+            {
+                try
+                {
+                    _context.Empleados.Remove(empleado);
+                    _context.SaveChanges();
+                }
+                catch (Exception)
+                {
+                    throw new InvalidOperationException("No se ha podido eliminar al empleado!");
+                }
+            }
+            else
+            {
+                throw new InvalidOperationException("No se ha encontrado al empleado!");
+            }
+        }
+
+
+        public void Update(Personal obj)
+        {
+            try
+            {
+                var personal = Get(obj.Id);
+                if (personal == null) throw new Exception($"No se ha encontrado la actividad con id {obj.Id}");
+                if (obj.Name.Data != null) { personal.Name.Data = obj.Name.Data; };
+                if (obj.Apellido.Data != null) { personal.Apellido.Data = obj.Apellido.Data; };
+                if (obj.Cedula != null) { personal.Cedula.Data=obj.Cedula.Data; };
+                if (obj.Domicilio.Data != null) { personal.Domicilio.Data = obj.Domicilio.Data; };
+                if (obj.Contacto != null) { personal.Contacto.Telefono1.Data = obj.Contacto.Telefono1.Data; };
+                if (obj.Horario != null) { personal.Horario.Id = obj.Horario.Id; };
+
+
+                _context.Empleados.Update(personal);
+                _context.SaveChanges();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

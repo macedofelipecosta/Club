@@ -7,31 +7,16 @@ using System.Threading.Tasks;
 
 namespace LogicaNegocio.Interfaces.IRepositorios
 {
-    public class IRepositorioEquipo : IRepositorio<Equipo>
+    public interface IRepositorioEquipo : IRepositorio<Equipo>
     {
-        public void Add(Equipo obj)
-        {
-            throw new NotImplementedException();
-        }
+        public void Add(Equipo obj);
 
-        public void Delete(Equipo obj)
-        {
-            throw new NotImplementedException();
-        }
+        public void Delete(Equipo obj);
 
-        public Equipo Get(int id)
-        {
-            throw new NotImplementedException();
-        }
+        public Equipo Get(int id);
 
-        public IEnumerable<Equipo> GetAll()
-        {
-            throw new NotImplementedException();
-        }
+        public IEnumerable<Equipo> GetAll();
 
-        public void Update(Equipo obj)
-        {
-            throw new NotImplementedException();
-        }
+        public void Update(Equipo obj);
     }
 }

@@ -40,7 +40,26 @@ namespace LogicaConexion.EntityFramework.Repositorios
                 throw;
             }
         }
+        public void Update(Administrador obj)
+        {
+            try
+            {
+                var administrador = Get(obj.Id);
+                if (administrador == null) throw new Exception($"No se ha encontrado la actividad con id {obj.Id}");
+                if (obj.Name.Data== null) { throw new Exception($"No se ha encontrado un nombre para modificar"); };
+                if (obj.Email.Data == null) { throw new Exception($"No se han encontrado un horario para modificar"); };
 
+                administrador.Name.Data = obj.Name.Data;
+                administrador.Email.Data = obj.Email.Data;
+             
+                _context.Administradores.Update(administrador);
+                _context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
         public Administrador Get(int id)
         {
             try

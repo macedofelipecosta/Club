@@ -7,31 +7,16 @@ using System.Threading.Tasks;
 
 namespace LogicaNegocio.Interfaces.IRepositorios
 {
-    public class IRepositorioMutualista : IRepositorio<Mutualista>
+    public interface IRepositorioMutualista : IRepositorio<Mutualista>
     {
-        public void Add(Mutualista obj)
-        {
-            throw new NotImplementedException();
-        }
+        public void Add(Mutualista obj);
 
-        public void Delete(Mutualista obj)
-        {
-            throw new NotImplementedException();
-        }
+        public void Delete(Mutualista obj);
 
-        public Mutualista Get(int id)
-        {
-            throw new NotImplementedException();
-        }
+        public Mutualista Get(int id);
 
-        public IEnumerable<Mutualista> GetAll()
-        {
-            throw new NotImplementedException();
-        }
+        public IEnumerable<Mutualista> GetAll();
 
-        public void Update(Mutualista obj)
-        {
-            throw new NotImplementedException();
-        }
+        public void Update(Mutualista obj);
     }
 }
