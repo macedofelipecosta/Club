@@ -8,6 +8,6 @@ namespace LogicaAplicacion.Interfaces
 {
     public interface UpdateObject<T>
     {
-        public T UpdateObj(T obj);
+        public void UpdateObj(T obj);
     }
 }

@@ -46,6 +46,7 @@ namespace LogicaConexion.EntityFramework.Repositorios
                 throw new Exception(e.Message);
             }
         }
+
         public void Update(Actividad obj)
         {
             try
@@ -70,6 +71,7 @@ namespace LogicaConexion.EntityFramework.Repositorios
                 throw new Exception(e.Message);
             }
         }
+
         public IEnumerable<Actividad> GetAll()
         {
             try
@@ -83,6 +85,7 @@ namespace LogicaConexion.EntityFramework.Repositorios
                 throw new Exception(e.Message);
             }
         }
+
         public Actividad Get(int id)
         {
             try
