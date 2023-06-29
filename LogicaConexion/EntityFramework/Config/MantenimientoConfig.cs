@@ -1,5 +1,5 @@
-﻿using LogicaNegocio.Entidades;
-using LogicaNegocio.Entidades.Empleados;
+﻿using LogicaNegocio.Entidades.Empleados;
+using LogicaNegocio.Entidades.Servicios;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;

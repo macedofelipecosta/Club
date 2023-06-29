@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LogicaNegocio.Entidades
+namespace LogicaNegocio.Entidades.Servicios
 {
     public class Mantenimiento
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public Sala Sala { get; set; }
         public Equipo Equipo { get; set; }
         public Observaciones Descripcion { get; set; }

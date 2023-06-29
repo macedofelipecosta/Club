@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LogicaNegocio.Entidades
+namespace LogicaNegocio.Entidades.Servicios
 {
     public class Higiene
     {

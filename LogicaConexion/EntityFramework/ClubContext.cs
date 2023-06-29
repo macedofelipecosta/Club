@@ -5,6 +5,7 @@ using LogicaNegocio.Entidades.Actividades;
 using Microsoft.EntityFrameworkCore.Internal;
 using LogicaNegocio.Entidades.Empleados;
 using LogicaNegocio.Entidades.Instalaciones;
+using LogicaNegocio.Entidades.Servicios;
 
 namespace LogicaConexion.EntityFramework
 {
@@ -19,6 +20,8 @@ namespace LogicaConexion.EntityFramework
         public DbSet<Sala> Salas { get; set; }
         public DbSet<Administrador> Administradores { get; set; }
         public DbSet<Mutualista> Mutualistas { get; set; }
+        public DbSet<Mantenimiento> Mantenimientos { get; set; }
+        public DbSet<Higiene> Higienes { get; set; }
 
 
         public ClubContext(DbContextOptions options) : base(options) { }
