@@ -16,9 +16,9 @@ namespace LogicaConexion.EntityFramework.Config
             builder.HasKey("Id");
             builder.HasIndex(e => e.Id).IsUnique();
 
-            builder.OwnsOne(administrador => administrador.Name.Data).Property(Name=>Name).HasColumnName("NombreAdmin");
-            builder.OwnsOne(administrador => administrador.Email.Data).Property(Email => Email).HasColumnName("EmailAdmin");
-            //builder.OwnsOne(administrador => administrador.Identificador).Property(Identificador => Identificador).HasColumnName("EmailAdmin");
+            builder.OwnsOne(administrador => administrador.Name).Property(Name=>Name.Data).HasColumnName("NombreAdmin");
+            builder.OwnsOne(administrador => administrador.Email).Property(Email => Email.Data).HasColumnName("EmailAdmin");
+            
         }
     }
 }

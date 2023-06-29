@@ -9,7 +9,7 @@ namespace LogicaNegocio.Entidades.Actividades
 {
     public class Reserva
     {
-        public int NumeroReserva { get; set; }
+        public int Id { get; set; }
         public Socio Socio { get; set; }
         public Actividad Actividad { get; set; }
         public Sala Sala { get; set; }

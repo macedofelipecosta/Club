@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LogicaNegocio.Entidades.Empleados
 {
-    public class Mantenimiento : Personal
+    public class Tecnico : Personal
     {
     }
 }

@@ -7,11 +7,11 @@ namespace LogicaNegocio.Entidades
         public int Id { get; set; }
         public Nombre Name { get; set; }
         public Email Email { get; set; }
-        public Guid Identificador { get; private set; }
+        
 
         public Administrador()
         {
-            Identificador = Guid.NewGuid();
+            
         }
 
 

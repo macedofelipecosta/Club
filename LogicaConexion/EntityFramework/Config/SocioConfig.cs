@@ -18,7 +18,10 @@ namespace LogicaConexion.EntityFramework.Config
             entityTypeBuilder.OwnsOne(socio => socio.Nacimiento).Property(Nacimiento => Nacimiento.Data).HasColumnName("Nacimiento");
             entityTypeBuilder.OwnsOne(socio => socio.Edad).Property(Edad => Edad.Data).HasColumnName("Edad");
             entityTypeBuilder.OwnsOne(socio => socio.Mutualista).Property(Mutualista => Mutualista.Id).HasColumnName("Mutualista");
-            entityTypeBuilder.OwnsOne(socio => socio.Domicilio).Property(Domicilio => Domicilio.Data).HasColumnName("Domicilio");
+            entityTypeBuilder.OwnsOne(socio => socio.Domicilio).Property(Domicilio => Domicilio.Calle).HasColumnName("Domicilio");
+            entityTypeBuilder.OwnsOne(socio => socio.Domicilio).Property(Domicilio => Domicilio.Nro).HasColumnName("NroPuerta");
+            entityTypeBuilder.OwnsOne(socio => socio.Domicilio).Property(Domicilio => Domicilio.Esquina1).HasColumnName("Esquina1");
+            entityTypeBuilder.OwnsOne(socio => socio.Domicilio).Property(Domicilio => Domicilio.Esquina2).HasColumnName("Esquina2");
             entityTypeBuilder.OwnsOne(socio => socio.Email).Property(Email => Email.Data).HasColumnName("Email");
             entityTypeBuilder.OwnsOne(socio => socio.Contacto).Property(Contacto => Contacto.Telefono1).HasColumnName("Contacto");
             entityTypeBuilder.OwnsOne(socio => socio.Registro).Property(Registro => Registro.Data).HasColumnName("Registro");
