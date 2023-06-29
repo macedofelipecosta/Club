@@ -1,6 +1,8 @@
-﻿using LogicaNegocio.Entidades;
+﻿using LogicaConexion.EntityFramework.Exceptions;
+using LogicaNegocio.Entidades;
 using LogicaNegocio.Interfaces.IRepositorios;
 using LogicaNegocio.ValueObject;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,74 +23,55 @@ namespace LogicaConexion.EntityFramework.Repositorios
         {
             try
             {
+                if (obj == null) { throw new ArgumentNullException("No se ha recibido un socio para agregar a la base de datos!"); }
                 _context.Socios.Add(obj);
                 _context.SaveChanges();
             }
-            catch (Exception e)
-            {
-
-                throw new Exception(e.Message);
-            }
+            catch (ArgumentNullException e){throw new RepositorioSocioException(e.Message);}
+            catch (Exception) { throw new RepositorioSocioException("Ha ocurrido un error inesperado!"); }
         }
 
-        public void Edit(Socio obj)
+        public void Update(Socio obj)
         {
             try
             {
                 var socio = Get(obj.Id);
-                if (obj.Nombre.Data == null) socio.Nombre.Data = socio.Nombre.Data;
-                if (obj.Apellido.Data == null) socio.Apellido.Data = socio.Apellido.Data;
-                if (obj.Email.Data == null) socio.Email.Data = socio.Email.Data;
-                if (obj.Cedula.Data == null) socio.Cedula.Data = socio.Cedula.Data;
-                if (obj.Mutualista == null) socio.Mutualista.Id = socio.Mutualista.Id;
-                if (obj.Domicilio.Data == null) socio.Domicilio.Data = socio.Domicilio.Data;
-
-
-                socio.Nombre.Data = obj.Nombre.Data;
-                socio.Apellido.Data = obj.Apellido.Data;
-                socio.Email.Data = obj.Email.Data;
-                socio.Cedula.Data = obj.Cedula.Data;
-                socio.Mutualista.Id = obj.Mutualista.Id;
-                socio.Domicilio.Data = obj.Domicilio.Data;
-                socio.Nacimiento.Data = obj.Nacimiento.Data;
+                if (obj.Nombre.Data != null) obj.Nombre.Data = socio.Nombre.Data;
+                if (obj.Apellido.Data != null) obj.Apellido.Data = socio.Apellido.Data;
+                if (obj.Email.Data != null) obj.Email.Data = socio.Email.Data;
+                if (obj.Cedula.Data != null) obj.Cedula.Data = socio.Cedula.Data;
+                if (obj.Mutualista != null) obj.Mutualista.Id = socio.Mutualista.Id;
+                if (obj.Domicilio.Data != null) obj.Domicilio.Data = socio.Domicilio.Data;
 
                 _context.Socios.Update(socio);
                 _context.SaveChanges();
             }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
+            catch (RepositorioSocioException e) { throw new RepositorioSocioException(e.Message); }
+            catch (Exception) { throw new RepositorioSocioException("Ha ocurrido un error inesperado!"); }
         }
-
-
-
 
         public void Delete(Socio obj)
         {
             try
             {
                 var socio = Get(obj.Id);
-                if (socio == null) throw new Exception($"No se ha podido borrar al socio Nro {obj.Id}");
                 _context.Socios.Remove(socio);
                 _context.SaveChanges();
             }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
+            catch (RepositorioSocioException e) { throw new RepositorioSocioException(e.Message); }
+            catch (Exception) { throw new RepositorioSocioException("Ha ocurrido un error inesperado!"); }
         }
 
         public IEnumerable<Socio> GetAll()
         {
             try
             {
-                return _context.Socios.ToList();
+                var socios=_context.Socios.ToList();
+                if (socios.IsNullOrEmpty()) { throw new InvalidOperationException("No se han encontrado socios en la base de datos!"); }
+                return socios;
             }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
+            catch (InvalidOperationException e) { throw new RepositorioSocioException(e.Message); }
+            catch (Exception) { throw new RepositorioSocioException("Ha ocurrido un error inesperado!"); }
 
         }
 
@@ -97,16 +80,11 @@ namespace LogicaConexion.EntityFramework.Repositorios
             try
             {
                 var socio = _context.Socios.FirstOrDefault(x => x.Id == id);
-                if (socio != null)
-                {
-                    return socio;
-                }
-                else throw new Exception($"No se ha encontrado al socio Nro {id}!");
+                if (socio == null){ throw new InvalidOperationException("No se ha encontrado el socio buscado"); }
+                return socio;
             }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
+            catch (InvalidOperationException e) { throw new RepositorioSocioException(e.Message); }
+            catch (Exception) { throw new RepositorioSocioException("Ha ocurrido un error inesperado!"); }
         }
 
 
