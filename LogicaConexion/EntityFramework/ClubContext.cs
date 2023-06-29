@@ -29,6 +29,16 @@ namespace LogicaConexion.EntityFramework
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.ApplyConfiguration(new ActividadConfig());
+            modelBuilder.ApplyConfiguration(new AdministradorConfig());
+            modelBuilder.ApplyConfiguration(new EquipoConfig());
+            modelBuilder.ApplyConfiguration(new HigieneConfig());
+            modelBuilder.ApplyConfiguration(new HorarioConfig());
+            modelBuilder.ApplyConfiguration(new MantenimientoConfig());
+            modelBuilder.ApplyConfiguration(new PersonalConfig());
+            modelBuilder.ApplyConfiguration(new ProfesorConfig());
+            modelBuilder.ApplyConfiguration(new ReservaConfig());
+            modelBuilder.ApplyConfiguration(new SalaConfig());
             modelBuilder.ApplyConfiguration(new SocioConfig());
 
             base.OnModelCreating(modelBuilder);
