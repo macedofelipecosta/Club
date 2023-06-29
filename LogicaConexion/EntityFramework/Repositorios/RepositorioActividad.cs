@@ -1,4 +1,5 @@
-﻿using LogicaNegocio.Entidades.Actividades;
+﻿using LogicaConexion.EntityFramework.Exceptions;
+using LogicaNegocio.Entidades.Actividades;
 using LogicaNegocio.Entidades.Empleados;
 using LogicaNegocio.Entidades.Instalaciones;
 using LogicaNegocio.Interfaces.IRepositorios;
@@ -24,13 +25,12 @@ namespace LogicaConexion.EntityFramework.Repositorios
         {
             try
             {
+                if (obj == null) { throw new ArgumentNullException("No se ha recibido actividad para guardar en base de datos"); }
                 _context.Actividades.Add(obj);
                 _context.SaveChanges();
             }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
+            catch (ArgumentNullException e) { throw new RepositorioActividadException(e.Message); }
+            catch (Exception) { throw new RepositorioActividadException("Ha ocurrido un error inesperado!"); }
         }
       
         public void Delete(Actividad obj)
@@ -41,10 +41,8 @@ namespace LogicaConexion.EntityFramework.Repositorios
                 _context.Actividades.Remove(actividad);
                 _context.SaveChanges();
             }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
+            catch (RepositorioActividadException e) { throw new RepositorioActividadException(e.Message); }
+            catch (Exception) { throw new RepositorioActividadException("Ha ocurrido un error inesperado!"); }
         }
 
         public void Update(Actividad obj)
@@ -52,24 +50,16 @@ namespace LogicaConexion.EntityFramework.Repositorios
             try
             {
                 var actividad = Get(obj.Id);
-                if (actividad == null) throw new Exception($"No se ha encontrado la actividad con id {obj.Id}");
-                if (obj.Nombre.Data == null) { throw new Exception($"No se ha encontrado un nombre para modificar"); };
-                if (obj.Horario.Id == null) { throw new Exception($"No se han encontrado un horario para modificar"); };
-                if (obj.Profesor.Id == null) { throw new Exception($"No se han encontrado profesor para modificar"); };
-                if (obj.Sala.Id == null) { throw new Exception($"No se han encontrado sala para modificar"); };
-
-                actividad.Nombre.Data = obj.Nombre.Data;
-                actividad.Horario.Id = obj.Horario.Id;
-                actividad.Profesor.Id = obj.Profesor.Id;
-                actividad.Sala.Id = obj.Sala.Id;
+                if (obj.Nombre.Data != null) { actividad.Nombre.Data = obj.Nombre.Data; }
+                if (obj.Profesor.Id != 0) { actividad.Profesor.Id = obj.Profesor.Id; }
+                if (obj.Sala.Id != 0) { actividad.Sala.Id = obj.Sala.Id; }
+                if (obj.Horario.Id != 0) { actividad.Horario.Id = obj.Horario.Id; }
 
                 _context.Actividades.Update(actividad);
                 _context.SaveChanges();
             }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
+            catch (RepositorioActividadException e) { throw new RepositorioActividadException(e.Message); }
+            catch (Exception) { throw new RepositorioActividadException("Ha ocurrido un error inesperado!"); }
         }
 
         public IEnumerable<Actividad> GetAll()
@@ -77,13 +67,11 @@ namespace LogicaConexion.EntityFramework.Repositorios
             try
             {
                 var actividades = _context.Actividades.ToList();
-                if (actividades.IsNullOrEmpty()) throw new Exception("No se han encontrado actividades!");
+                if (actividades.IsNullOrEmpty()) throw new InvalidOperationException("No se han encontrado actividades en la base de datos!");
                 return actividades;
             }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
+            catch (InvalidOperationException e) { throw new RepositorioActividadException(e.Message); }
+            catch (Exception) { throw new RepositorioActividadException("Ha ocurrido un error inesperado!"); }
         }
 
         public Actividad Get(int id)
@@ -91,13 +79,11 @@ namespace LogicaConexion.EntityFramework.Repositorios
             try
             {
                 var actividad = _context.Actividades.FirstOrDefault(x => x.Id == id);
-                if (actividad == null) throw new Exception("No se ha encontrado la actividad!");
+                if (actividad == null) throw new InvalidOperationException("No se ha encontrado la actividad buscada!");
                 return actividad;
             }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
+            catch (InvalidOperationException e) { throw new RepositorioActividadException(e.Message); }
+            catch (Exception) { throw new RepositorioActividadException("Ha ocurrido un error inesperado!"); }
         }
 
         

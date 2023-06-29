@@ -22,12 +22,12 @@ namespace LogicaConexion.EntityFramework.Repositorios
         {
             try
             {
+                if (obj == null) { throw new ArgumentNullException("No se ha recibido ningun horario para almacenar en base de datos!"); }
                 _context.Horarios.Add(obj);
+                _context.SaveChanges();
             }
-            catch (Exception)
-            {
-                throw new RepositorioHorarioException("No se ha podido crear el horario!");
-            }
+            catch (ArgumentNullException e) { throw new RepositorioHorarioException(e.Message); }
+            catch (Exception) { throw new RepositorioHorarioException("Ha ocurrido un error inesperado!"); }
         }
         public void Delete(Horario obj)
         {
@@ -37,11 +37,8 @@ namespace LogicaConexion.EntityFramework.Repositorios
                 _context.Horarios.Remove(horario);
                 _context.SaveChanges();
             }
-            catch (Exception e)
-            {
-
-                throw new RepositorioHorarioException(e.Message);
-            }
+            catch (RepositorioHorarioException e) { throw new RepositorioHorarioException(e.Message); }
+            catch (Exception) { throw new RepositorioHorarioException("Ha ocurrido un error inesperado!"); }
 
         }
         public void Update(Horario obj)
@@ -49,41 +46,35 @@ namespace LogicaConexion.EntityFramework.Repositorios
             try
             {
                 var horario = Get(obj.Id);
-                horario.Inicio = obj.Inicio;
-                horario.Fin = obj.Fin;
+                if (obj.Inicio != DateTime.MinValue) { horario.Inicio = obj.Inicio; }
+                if (obj.Fin!=DateTime.MinValue) { horario.Fin = obj.Fin; }
                 _context.Horarios.Update(horario);
                 _context.SaveChanges();
             }
-            catch (Exception e)
-            {
-                throw new RepositorioHorarioException(e.Message);
-            }
+            catch (RepositorioHorarioException e) { throw new RepositorioHorarioException(e.Message); }
+            catch (Exception) { throw new RepositorioHorarioException("Ha ocurrido un error inesperado!"); }
         }
         public Horario Get(int id)
         {
             try
             {
                 var horario = _context.Horarios.FirstOrDefault(x => x.Id == id);
-                if (horario == null) throw new KeyNotFoundException("No se ha encnotrado el horario!");
+                if (horario == null) throw new InvalidOperationException("No se ha encnotrado el horario!");
                 return horario;
             }
-            catch (Exception e)
-            {
-                throw new RepositorioHorarioException(e.Message);
-            }
+            catch (InvalidOperationException e) { throw new RepositorioHorarioException(e.Message); }
+            catch (Exception) { throw new RepositorioHorarioException("Ha ocurrido un error inesperado!"); }
         }
         public IEnumerable<Horario> GetAll()
         {
             try
             {
                 var horarios = _context.Horarios.ToList();
-                if (horarios.IsNullOrEmpty()) throw new Exception("No se han encontrado horarios!");
+                if (horarios.IsNullOrEmpty()) throw new InvalidOperationException("No se han encontrado horarios!");
                 return horarios;
             }
-            catch (Exception e)
-            {
-                throw new RepositorioHorarioException(e.Message);
-            }
+            catch (InvalidOperationException e) { throw new RepositorioHorarioException(e.Message); }
+            catch (Exception) { throw new RepositorioHorarioException("Ha ocurrido un error inesperado!"); }
         }
 
 

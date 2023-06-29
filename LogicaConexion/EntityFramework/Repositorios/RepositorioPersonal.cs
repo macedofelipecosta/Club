@@ -25,12 +25,12 @@ namespace LogicaConexion.EntityFramework.Repositorios
         {
             try
             {
-                if (obj == null) { throw new ArgumentNullException(nameof(obj)); }
+                if (obj == null) { throw new ArgumentNullException(nameof(obj),"No se ha recibido personal para guardar en la base de datos!"); }
                 _context.Empleados.Add(obj);
                 _context.SaveChanges();
             }
             catch (ArgumentNullException e) { throw new RepositorioPersonalException(e.Message); }
-            catch (Exception) { throw new RepositorioPersonalException("Ha ocurrido un error inesperado!"); }
+            catch (Exception ex) { throw new RepositorioPersonalException("Ha ocurrido un error inesperado!", ex); }
         }
 
         public Personal Get(int id)
@@ -80,7 +80,10 @@ namespace LogicaConexion.EntityFramework.Repositorios
                 if (obj.Name.Data != null) { personal.Name.Data = obj.Name.Data; };
                 if (obj.Apellido.Data != null) { personal.Apellido.Data = obj.Apellido.Data; };
                 if (obj.Cedula != null) { personal.Cedula.Data = obj.Cedula.Data; };
-                if (obj.Domicilio.Data != null) { personal.Domicilio.Data = obj.Domicilio.Data; };
+                if (obj.Domicilio.Calle != null) { personal.Domicilio.Calle = obj.Domicilio.Calle; };
+                if (obj.Domicilio.Nro != 0) { personal.Domicilio.Nro = obj.Domicilio.Nro; };
+                if (obj.Domicilio.Esquina1 != null) { personal.Domicilio.Esquina1 = obj.Domicilio.Esquina1; };
+                if (obj.Domicilio.Esquina2 != null) { personal.Domicilio.Esquina2 = obj.Domicilio.Esquina2; };
                 if (obj.Contacto != null) { personal.Contacto.Telefono1.Data = obj.Contacto.Telefono1.Data; };
                 if (obj.Horario != null) { personal.Horario.Id = obj.Horario.Id; };
                 _context.Empleados.Update(personal);

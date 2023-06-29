@@ -35,7 +35,7 @@ namespace LogicaConexion.EntityFramework.Repositorios
         {
             try
             {
-                var reserva = Get(obj.NumeroReserva);
+                var reserva = Get(obj.Id);
                 _context.Remove(reserva);
                 _context.SaveChanges();
             }
@@ -46,7 +46,7 @@ namespace LogicaConexion.EntityFramework.Repositorios
         {
             try
             {
-                var reserva = Get(obj.NumeroReserva);
+                var reserva = Get(obj.Id);
                 if (obj.Actividad.Id != null) { reserva.Actividad.Id = obj.Actividad.Id; }
                 if (obj.Sala.Id != null) { reserva.Sala.Id = obj.Sala.Id;}
                 if(obj.Fecha!=null) { reserva.Fecha=obj.Fecha;}
@@ -61,7 +61,7 @@ namespace LogicaConexion.EntityFramework.Repositorios
         {
             try
             {
-                var reserva = _context.Reservas.FirstOrDefault(X => X.NumeroReserva == numeroReserva);
+                var reserva = _context.Reservas.FirstOrDefault(X => X.Id == numeroReserva);
                 if (reserva == null) throw new InvalidOperationException("No se han encontrado reservas con este número!");
                 return reserva;
             }

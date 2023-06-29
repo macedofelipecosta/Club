@@ -23,14 +23,12 @@ namespace LogicaConexion.EntityFramework.Repositorios
         {
             try
             {
-                if (obj == null) throw new ArgumentNullException("No se ha recibido un objeto para agregar a la base de datos");
+                if (obj == null) throw new ArgumentNullException("No se ha recibido una mutualista para agregar a la base de datos");
                 _context.Mutualistas.Add(obj);
                 _context.SaveChanges();
             }
-            catch (Exception e)
-            {
-                throw new RepositorioMutualistaException (e.Message);
-            }
+            catch (ArgumentNullException) { throw new RepositorioMutualistaException("Ha ocurrido un error inesperado!"); }
+            catch (Exception) { throw new RepositorioMutualistaException("Ha ocurrido un error inesperado!"); }
         }
 
         public void Delete(Mutualista obj)
@@ -41,10 +39,8 @@ namespace LogicaConexion.EntityFramework.Repositorios
                 _context.Mutualistas.Remove(mutualista);
                 _context.SaveChanges();
             }
-            catch (Exception e)
-            {
-                throw new RepositorioMutualistaException(e.Message);
-            }
+            catch (RepositorioMutualistaException) { throw new RepositorioMutualistaException("Ha ocurrido un error inesperado!"); }
+            catch (Exception) { throw new RepositorioMutualistaException("Ha ocurrido un error inesperado!"); }
         }
 
         public Mutualista Get(int id)
@@ -55,10 +51,8 @@ namespace LogicaConexion.EntityFramework.Repositorios
                 if (mutualista == null) throw new InvalidOperationException("No se ha podido encontrar la mutualista buscada");
                 return mutualista;
             }
-            catch (Exception e)
-            {
-                throw new RepositorioMutualistaException(e.Message);
-            }
+            catch (InvalidOperationException) { throw new RepositorioMutualistaException("Ha ocurrido un error inesperado!"); }
+            catch (Exception) { throw new RepositorioMutualistaException("Ha ocurrido un error inesperado!"); }
         }
 
         public IEnumerable<Mutualista> GetAll()
@@ -69,10 +63,8 @@ namespace LogicaConexion.EntityFramework.Repositorios
                 if (mutualistas.IsNullOrEmpty()) throw new InvalidOperationException("No se han encontrado mutualistas en la base de datos");
                 return mutualistas;
             }
-            catch (Exception e)
-            {
-                throw new RepositorioMutualistaException(e.Message);
-            }
+            catch (InvalidOperationException) { throw new RepositorioMutualistaException("Ha ocurrido un error inesperado!"); }
+            catch (Exception) { throw new RepositorioMutualistaException("Ha ocurrido un error inesperado!"); }
         }
 
         public void Update(Mutualista obj)
@@ -82,14 +74,12 @@ namespace LogicaConexion.EntityFramework.Repositorios
                 var mutualista=Get(obj.Id);
                 if (obj.Name.Data!=null) { mutualista.Name.Data = obj.Name.Data; }
                 if (obj.Telefono.Data!=null) { mutualista.Telefono.Data = obj.Telefono.Data; }
-
+                if (obj.Emergencia.Data!=null) { mutualista.Emergencia.Data = obj.Emergencia.Data; }
                 _context.Mutualistas.Update(mutualista);
                 _context.SaveChanges();
             }
-            catch (Exception e)
-            {
-                throw new RepositorioMutualistaException(e.Message);
-            }
+            catch (RepositorioMutualistaException) { throw new RepositorioMutualistaException("Ha ocurrido un error inesperado!"); }
+            catch (Exception) { throw new RepositorioMutualistaException("Ha ocurrido un error inesperado!"); }
         }
     }
 }

@@ -41,7 +41,10 @@ namespace LogicaConexion.EntityFramework.Repositorios
                 if (obj.Email.Data != null) obj.Email.Data = socio.Email.Data;
                 if (obj.Cedula.Data != null) obj.Cedula.Data = socio.Cedula.Data;
                 if (obj.Mutualista != null) obj.Mutualista.Id = socio.Mutualista.Id;
-                if (obj.Domicilio.Data != null) obj.Domicilio.Data = socio.Domicilio.Data;
+                if (obj.Domicilio.Calle != null) obj.Domicilio.Calle = socio.Domicilio.Calle;
+                if (obj.Domicilio.Nro != 0) obj.Domicilio.Nro = socio.Domicilio.Nro;
+                if (obj.Domicilio.Esquina1 != null) obj.Domicilio.Esquina1 = socio.Domicilio.Esquina1;
+                if (obj.Domicilio.Esquina2 != null) obj.Domicilio.Esquina2 = socio.Domicilio.Esquina2;
 
                 _context.Socios.Update(socio);
                 _context.SaveChanges();

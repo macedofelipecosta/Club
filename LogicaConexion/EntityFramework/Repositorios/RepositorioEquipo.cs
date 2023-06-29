@@ -23,16 +23,12 @@ namespace LogicaConexion.EntityFramework.Repositorios
         {
             try
             {
-                if (obj == null) throw new RepositorioEquipoException("No se ha recibido un Equipo para almacenar");
-                if (obj.Nombre.Data.IsNullOrEmpty()) throw new RepositorioEquipoException("El nombre del equipo se encuentra vacio");
+                if (obj == null) throw new ArgumentNullException("No se ha recibido un Equipo para guardar en la base de datos");
                 _context.Equipos.Add(obj);
                 _context.SaveChanges();
             }
-            catch (RepositorioEquipoException e)
-            {
-
-                throw new RepositorioEquipoException(e.Message);
-            }
+            catch (ArgumentNullException e) { throw new RepositorioEquipoException(e.Message); }
+            catch (Exception) { throw new RepositorioEquipoException("Ha ocurrido un error inesperado!"); }
         }
 
         public void Delete(Equipo obj)
@@ -43,8 +39,8 @@ namespace LogicaConexion.EntityFramework.Repositorios
                 _context.Equipos.Remove(equipo);
                 _context.SaveChanges();
             }
-            catch (RepositorioEquipoException e){throw new RepositorioEquipoException(e.Message);}
-            catch (Exception) { throw new RepositorioEquipoException("Ha ocurrido un error inesperado"); }
+            catch (RepositorioEquipoException e) { throw new RepositorioEquipoException(e.Message); }
+            catch (Exception) { throw new RepositorioEquipoException("Ha ocurrido un error inesperado!"); }
         }
 
         public Equipo Get(int id)
@@ -52,11 +48,11 @@ namespace LogicaConexion.EntityFramework.Repositorios
             try
             {
                 var equipo = _context.Equipos.FirstOrDefault(x => x.Id == id);
-                if (equipo == null) throw new RepositorioEquipoException("No se ha encontrado el equipo buscado");
+                if (equipo == null) throw new InvalidOperationException("No se ha encontrado el equipo buscado");
                 return equipo;
             }
-            catch (RepositorioEquipoException e) { throw new RepositorioEquipoException(e.Message); }
-            catch (Exception) { throw new RepositorioEquipoException("Ha ocurrido un error inesperado"); }
+            catch (InvalidOperationException e) { throw new RepositorioEquipoException(e.Message); }
+            catch (Exception) { throw new RepositorioEquipoException("Ha ocurrido un error inesperado!"); }
         }
 
         public IEnumerable<Equipo> GetAll()
@@ -64,27 +60,26 @@ namespace LogicaConexion.EntityFramework.Repositorios
             try
             {
                 var equipos = _context.Equipos.ToList();
-                if (equipos.IsNullOrEmpty()) throw new RepositorioEquipoException("No se han encontrado equipos en la base de datos");
+                if (equipos.IsNullOrEmpty()) throw new InvalidOperationException("No se han encontrado equipos en la base de datos");
                 return equipos;
             }
-            catch (RepositorioEquipoException e) { throw new RepositorioEquipoException(e.Message); }
-            catch (Exception) { throw new RepositorioEquipoException("Ha ocurrido un error inesperado"); }
+            catch (InvalidOperationException e) { throw new RepositorioEquipoException(e.Message); }
+            catch (Exception) { throw new RepositorioEquipoException("Ha ocurrido un error inesperado!"); }
         }
 
         public void Update(Equipo obj)
         {
             try
             {
-                if (obj == null) throw new RepositorioEquipoException("No se ha podido actualizar el equipo");
                 var equipo = Get(obj.Id);
-                if(obj.Nombre.Data!=null) { equipo.Nombre.Data = obj.Nombre.Data; }
+                if (obj.Nombre.Data != null) { equipo.Nombre.Data = obj.Nombre.Data; }
                 if (obj.Descripcion.Data != null) { equipo.Descripcion.Data = obj.Descripcion.Data; }
 
                 _context.Equipos.Update(equipo);
                 _context.SaveChanges();
             }
             catch (RepositorioEquipoException e) { throw new RepositorioEquipoException(e.Message); }
-            catch (Exception) { throw new RepositorioEquipoException("Ha ocurrido un error inesperado"); }
+            catch (Exception) { throw new RepositorioEquipoException("Ha ocurrido un error inesperado!"); }
         }
     }
 }
