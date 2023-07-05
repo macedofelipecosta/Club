@@ -12,7 +12,21 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <Folder Include="Controllers\Actividades\" />
+    <Folder Include="Controllers\Administradores\" />
+    <Folder Include="Controllers\Colaboradores\" />
+    <Folder Include="Controllers\Equipos\" />
+    <Folder Include="Controllers\Higienes\" />
+    <Folder Include="Controllers\Horarios\" />
+    <Folder Include="Controllers\Mantenimientos\" />
+    <Folder Include="Controllers\Mutualistas\" />
+    <Folder Include="Controllers\Socios\" />
+    <Folder Include="Controllers\Salas\" />
+    <Folder Include="Controllers\Reservas\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LogicaAplicacion\LogicaAplicacion.csproj" />
   </ItemGroup>
 
 </Project>
