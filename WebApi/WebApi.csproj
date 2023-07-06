@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Controllers\Administradores\**" />
     <Compile Remove="Controllers\Colaboradores\**" />
     <Compile Remove="Controllers\Equipos\**" />
     <Compile Remove="Controllers\Higienes\**" />
@@ -17,7 +16,6 @@
     <Compile Remove="Controllers\Reservas\**" />
     <Compile Remove="Controllers\Salas\**" />
     <Compile Remove="Controllers\Socios\**" />
-    <Content Remove="Controllers\Administradores\**" />
     <Content Remove="Controllers\Colaboradores\**" />
     <Content Remove="Controllers\Equipos\**" />
     <Content Remove="Controllers\Higienes\**" />
@@ -27,7 +25,6 @@
     <Content Remove="Controllers\Reservas\**" />
     <Content Remove="Controllers\Salas\**" />
     <Content Remove="Controllers\Socios\**" />
-    <EmbeddedResource Remove="Controllers\Administradores\**" />
     <EmbeddedResource Remove="Controllers\Colaboradores\**" />
     <EmbeddedResource Remove="Controllers\Equipos\**" />
     <EmbeddedResource Remove="Controllers\Higienes\**" />
@@ -37,7 +34,6 @@
     <EmbeddedResource Remove="Controllers\Reservas\**" />
     <EmbeddedResource Remove="Controllers\Salas\**" />
     <EmbeddedResource Remove="Controllers\Socios\**" />
-    <None Remove="Controllers\Administradores\**" />
     <None Remove="Controllers\Colaboradores\**" />
     <None Remove="Controllers\Equipos\**" />
     <None Remove="Controllers\Higienes\**" />
@@ -53,11 +49,13 @@
     <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.7">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.7" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Controllers\Actividades\Administradores\" />
   </ItemGroup>
 
   <ItemGroup>
