@@ -16,6 +16,10 @@ namespace LogicaNegocio.Entidades.Empleados
         public Cedula Cedula { get; set; }
         public Domicilio Domicilio { get; set; }
         public Contacto Contacto { get; set; }
-        public Horario Horario { get; set; }
+        public int HorarioId { get; set; }
+
+        public Personal()
+        {
+        }
     }
 }

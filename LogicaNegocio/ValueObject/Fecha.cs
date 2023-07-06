@@ -12,6 +12,11 @@ namespace LogicaNegocio.ValueObject
     {
         private DateTime _data;
 
-        public DateTime Data { get { return _data; } set { _data = value; } }
+        public DateTime Data { get { return _data; } private set { _data = value; } }
+
+        public Fecha(DateTime data)
+        {
+            _data = data;
+        }
     }
 }

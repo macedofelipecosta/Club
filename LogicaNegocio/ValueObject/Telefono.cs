@@ -11,9 +11,12 @@ namespace LogicaNegocio.ValueObject
     {
         private string _data;
 
-        public string Data { get { return _data; } set { _data = value; } }
+        public string Data { get { return _data; } private set { _data = value; } }
 
-
+        public Telefono(string data)
+        {
+            _data = data;
+        }
 
     }
 }

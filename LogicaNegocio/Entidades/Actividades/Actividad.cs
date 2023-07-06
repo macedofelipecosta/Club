@@ -13,9 +13,9 @@ namespace LogicaNegocio.Entidades.Actividades
     {
         public int Id { get; set; }
         public Nombre Nombre { get; set; }
-        public Horario Horario { get; set; }
-        public Profesor Profesor { get; set; }
-        public Sala Sala { get; set; }
+        public int HorarioId { get; set; }
+        public int ProfesorId { get; set; }
+        public int SalaId { get; set; }
 
     }
 }

@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace LogicaNegocio.Entidades.Empleados
 {
-    public class Limpieza:Personal
+    public class Limpieza : Personal
     {
-
+        public Limpieza()
+        {
+        }
     }
 }

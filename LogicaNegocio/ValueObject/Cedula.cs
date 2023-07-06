@@ -5,7 +5,7 @@ namespace LogicaNegocio.ValueObject
     public class Cedula
     {
         private string _data;
-        public string Data { get { return _data; }  set { _data = value; } }
+        public string Data { get { return _data; } set { _data = value; } }
 
         public Cedula(string data)
         {
@@ -17,9 +17,15 @@ namespace LogicaNegocio.ValueObject
 
         private void CIValidate(string inputString)
         {
-            string regexPattern = @"^\d{1}\.\d{1,3}\.\d{1,3}-\d{1}$";
-            bool isValid = System.Text.RegularExpressions.Regex.IsMatch(inputString, regexPattern);
-            if (!isValid) { throw new CedulaVOException($"La cédula {inputString} no es válida!"); }
+            try
+            {
+                string regexPattern = @"^\d{1}\.\d{1,3}\.\d{1,3}-\d{1}$";
+                bool isValid = System.Text.RegularExpressions.Regex.IsMatch(inputString, regexPattern);
+                if (!isValid) { throw new CedulaVOException($"La cédula {inputString} no es válida!"); }
+            }
+            catch (CedulaVOException e){throw new CedulaVOException(e.Message); ;}
+            catch (Exception) { throw new CedulaVOException("Ha ocurrido un error inesperado!"); }
+
         }
 
 

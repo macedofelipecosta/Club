@@ -48,6 +48,7 @@ namespace LogicaNegocio.Entidades
             }
             catch (AgeVOExeption e) { throw new SocioAgeException(e.Message); }
             catch (SocioAgeException e) { throw new SocioAgeException(e.Message); }
+            catch (Exception) { throw new SocioAgeException("Ha ocurrido un error inesperado!"); }
         }
 
 

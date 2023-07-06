@@ -9,8 +9,8 @@ namespace WebApi.DTOs
         public int Id { get; set; }
         public string Sala { get; set; }
         public string Descripcion { get; set; }
-        public string Limpieza { get; set; }
-        public string Date { get; set; }
+        public string PersonalId { get; set; }
+        public DateTime Date { get; set; }
 
     }
 }
