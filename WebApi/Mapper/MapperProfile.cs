@@ -58,7 +58,30 @@ namespace WebApi.Mapper
                 .ForMember(personal => personal.Cedula, personalDto => personalDto.MapFrom(campo => new Cedula(campo.Cedula)))
                 .ForMember(personal => personal.Domicilio, personalDto => personalDto.MapFrom(campo => new Domicilio(campo.Calle, campo.NumeroPuerta, campo.Esquina_1, campo.Esquina_2)))
                 .ForMember(personal => personal.Contacto, personalDto => personalDto.MapFrom(campo => new Contacto(new Email(campo.Email), new Telefono(campo.Telefono_1), new Telefono(campo.Telefono_2))))
-                .ForMember(personal => personal.HorarioId, personalDto => personalDto.MapFrom(campo => campo.HorarioId));
+                .ForMember(personal => personal.Horario, personalDto => personalDto.MapFrom(campo => campo.HorarioId));
+
+            CreateMap<ReservaDTO, Reserva>()
+                .ForMember(reserva => reserva.SocioId, reservaDto => reservaDto.MapFrom(campo => campo.SocioId))
+                .ForMember(reserva => reserva.ActividadId, reservaDto => reservaDto.MapFrom(campo => campo.ActividadId))
+                .ForMember(reserva => reserva.SalaId, reservaDto => reservaDto.MapFrom(campo => campo.SalaId))
+                .ForMember(reserva => reserva.Fecha, reservaDto => reservaDto.MapFrom(campo => new Fecha(campo.Fecha)));
+
+            CreateMap<SalaDTO, Sala>()
+                .ForMember(sala => sala.Nombre, salaDto => salaDto.MapFrom(campo => new Nombre(campo.Nombre)))
+                .ForMember(sala => sala.Descripcion, salaDto => salaDto.MapFrom(campo => new Observaciones(campo.Descripcion)));
+
+            CreateMap<SocioDTO, Socio>()
+                .ForMember(socio => socio.Cedula, socioDto => socioDto.MapFrom(campo => new Cedula(campo.Cedula)))
+                .ForMember(socio => socio.Nombre, socioDto => socioDto.MapFrom(campo => new Nombre(campo.Nombre)))
+                .ForMember(socio => socio.Apellido, socioDto => socioDto.MapFrom(campo => new Nombre(campo.Apellido)))
+                .ForMember(socio => socio.Nacimiento, socioDto => socioDto.MapFrom(campo => new Fecha(campo.Nacimiento)))
+                .ForMember(socio => socio.MutualistaId, socioDto => socioDto.MapFrom(campo => campo.MutualistaId))
+                .ForMember(socio => socio.Domicilio, socioDto => socioDto.MapFrom(campo => new Domicilio(campo.Calle, campo.Numero, campo.Esquina_1, campo.Esquina_2)))
+                .ForMember(socio => socio.Contacto, socioDto => socioDto.MapFrom(campo => new Contacto(new Email(campo.Email), new Telefono(campo.Telefono_1), new Telefono(campo.Telefono_2))));
+
+
+
+
         }
     }
 }

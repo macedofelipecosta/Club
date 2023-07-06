@@ -22,3 +22,4 @@ namespace LogicaConexion.EntityFramework.Config
         }
     }
 }
+ 

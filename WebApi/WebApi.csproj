@@ -7,6 +7,49 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\Administradores\**" />
+    <Compile Remove="Controllers\Colaboradores\**" />
+    <Compile Remove="Controllers\Equipos\**" />
+    <Compile Remove="Controllers\Higienes\**" />
+    <Compile Remove="Controllers\Horarios\**" />
+    <Compile Remove="Controllers\Mantenimientos\**" />
+    <Compile Remove="Controllers\Mutualistas\**" />
+    <Compile Remove="Controllers\Reservas\**" />
+    <Compile Remove="Controllers\Salas\**" />
+    <Compile Remove="Controllers\Socios\**" />
+    <Content Remove="Controllers\Administradores\**" />
+    <Content Remove="Controllers\Colaboradores\**" />
+    <Content Remove="Controllers\Equipos\**" />
+    <Content Remove="Controllers\Higienes\**" />
+    <Content Remove="Controllers\Horarios\**" />
+    <Content Remove="Controllers\Mantenimientos\**" />
+    <Content Remove="Controllers\Mutualistas\**" />
+    <Content Remove="Controllers\Reservas\**" />
+    <Content Remove="Controllers\Salas\**" />
+    <Content Remove="Controllers\Socios\**" />
+    <EmbeddedResource Remove="Controllers\Administradores\**" />
+    <EmbeddedResource Remove="Controllers\Colaboradores\**" />
+    <EmbeddedResource Remove="Controllers\Equipos\**" />
+    <EmbeddedResource Remove="Controllers\Higienes\**" />
+    <EmbeddedResource Remove="Controllers\Horarios\**" />
+    <EmbeddedResource Remove="Controllers\Mantenimientos\**" />
+    <EmbeddedResource Remove="Controllers\Mutualistas\**" />
+    <EmbeddedResource Remove="Controllers\Reservas\**" />
+    <EmbeddedResource Remove="Controllers\Salas\**" />
+    <EmbeddedResource Remove="Controllers\Socios\**" />
+    <None Remove="Controllers\Administradores\**" />
+    <None Remove="Controllers\Colaboradores\**" />
+    <None Remove="Controllers\Equipos\**" />
+    <None Remove="Controllers\Higienes\**" />
+    <None Remove="Controllers\Horarios\**" />
+    <None Remove="Controllers\Mantenimientos\**" />
+    <None Remove="Controllers\Mutualistas\**" />
+    <None Remove="Controllers\Reservas\**" />
+    <None Remove="Controllers\Salas\**" />
+    <None Remove="Controllers\Socios\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.7" />
@@ -14,17 +57,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\Actividades\" />
-    <Folder Include="Controllers\Administradores\" />
-    <Folder Include="Controllers\Colaboradores\" />
-    <Folder Include="Controllers\Equipos\" />
-    <Folder Include="Controllers\Higienes\" />
-    <Folder Include="Controllers\Horarios\" />
-    <Folder Include="Controllers\Mantenimientos\" />
-    <Folder Include="Controllers\Mutualistas\" />
-    <Folder Include="Controllers\Socios\" />
-    <Folder Include="Controllers\Salas\" />
-    <Folder Include="Controllers\Reservas\" />
+    <Folder Include="Controllers\Actividades\Administradores\" />
   </ItemGroup>
 
   <ItemGroup>

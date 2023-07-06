@@ -10,9 +10,9 @@ namespace LogicaNegocio.Entidades.Actividades
     public class Reserva
     {
         public int Id { get; set; }
-        public Socio Socio { get; set; }
-        public Actividad Actividad { get; set; }
-        public Sala Sala { get; set; }
+        public int SocioId { get; set; }
+        public int ActividadId { get; set; }
+        public int SalaId { get; set; }
         public DateTime Fecha { get; set; }
     }
 }

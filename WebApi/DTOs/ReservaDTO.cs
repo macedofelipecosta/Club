@@ -7,9 +7,9 @@ namespace WebApi.DTOs
     public class ReservaDTO
     {
         public int Id { get; set; }
-        public string Socio { get; set; }
-        public string Actividad { get; set; }
-        public string Sala { get; set; }
+        public int SocioId { get; set; }
+        public int ActividadId { get; set; }
+        public int SalaId { get; set; }
         public DateTime Fecha { get; set; }
 
     }

@@ -18,9 +18,8 @@ namespace LogicaNegocio.Entidades
         public Nombre Apellido { get; set; }
         public Fecha Nacimiento { get; set; }
         public Edad Edad { get; private set; }
-        public Mutualista Mutualista { get; set; }
+        public int MutualistaId { get; set; }
         public Domicilio Domicilio { get; set; }
-        public Email Email { get; set; }
         public Contacto Contacto { get; set; }
         public Fecha Registro { get; set; }
         public Observaciones Observaciones { get; set; }
