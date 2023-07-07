@@ -69,20 +69,21 @@ namespace WebApi.Controllers
                 List<ActividadDTO> actividades = _mapper.Map<List<ActividadDTO>>(lista);
                 return Ok(actividades);
             }
-            catch (RepositorioActividadException e) { throw new ActividadesControllerException(e.Message); }
+            catch (GetAllActividadesLAException e) { throw new ActividadesControllerException(e.Message); }
             catch (ActividadesControllerException e) { throw new ActividadesControllerException(e.Message); }
             catch (Exception) { throw new ActividadesControllerException("Ha ocurrido un error inesperado!"); }
         }
 
         // POST api/<ActividadesController>
         [HttpPost]
-        public void Post(ActividadDTO objDto)
+        public ActionResult<Actividad> Post(ActividadDTO objDto)
         {
             try
             {
                 if (objDto == null) throw new ActividadesControllerException("No se ha recibido una actividad para dar de alta!");
                 var actividad=_mapper.Map<Actividad>(objDto);
                 _new.NewObj(actividad);
+                return Created($"Se ha dado de alta la actividad {objDto.Nombre}", objDto);
             }
             catch (NewActividadLAException e) { throw new ActividadesControllerException(e.Message); }
             catch (ActividadesControllerException e) { throw new ActividadesControllerException(e.Message); }
@@ -92,14 +93,35 @@ namespace WebApi.Controllers
 
         // PUT api/<ActividadesController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public ActionResult<Actividad> Put(ActividadDTO objDto)
         {
+            try
+            {
+                if (objDto == null) throw new ActividadesControllerException("No se ha recibido una actividad para dar de alta!");
+                var actividad=_mapper.Map<Actividad>(objDto);
+                _update.UpdateObj(actividad);
+                return Ok($"Se ha modificado la actividad ${objDto.Nombre} correctamente!");
+            }
+            catch (UpdateActividadLAException e) { throw new ActividadesControllerException(e.Message); }
+            catch (ActividadesControllerException e) { throw new ActividadesControllerException(e.Message); }
+            catch (Exception) { throw new ActividadesControllerException("Ha ocurrido un error inesperado!"); }
+
         }
 
         // DELETE api/<ActividadesController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult<Actividad> Delete(int id)
         {
+            try
+            {
+                var actividad = _get.GetObject(id);
+                if (actividad.Id != id) throw new ActividadesControllerException("Las actividades no coinciden, error inesperado! ");
+                _delete.DeleteObj(actividad);
+                return Ok($"Se ha eliminado la actividad {actividad.Nombre.Data} correctamente!");
+            }
+            catch (DeleteActividadLAException e) { throw new ActividadesControllerException(e.Message); }
+            catch (ActividadesControllerException e) { throw new ActividadesControllerException(e.Message); }
+            catch (Exception) { throw new ActividadesControllerException("Ha ocurrido un error inesperado!"); }
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using LogicaAplicacion.Exceptions.Administradores;
 using LogicaAplicacion.Interfaces;
+using LogicaConexion.EntityFramework.Exceptions;
 using LogicaConexion.EntityFramework.Repositorios;
 using LogicaNegocio.Entidades;
 using System;
@@ -25,11 +26,8 @@ namespace LogicaAplicacion.CasosUso.Administradores
             {
                 return _repo.Get(id);
             }
-            catch (Exception)
-            {
-
-                throw new GetAdministradorLAException("Ha ocurrido un error inesperado");
-            }
+            catch (RepositorioAdministradorException e) { throw new GetAdministradorLAException(e.Message); }
+            catch (Exception) { throw new GetAdministradorLAException("Ha ocurrido un error inesperado"); }
         }
     }
 }

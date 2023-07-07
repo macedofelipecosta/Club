@@ -27,11 +27,7 @@ namespace LogicaAplicacion.CasosUso.Equipos
                 return _repo.Get(id);
             }
             catch (RepositorioEquipoException e) { throw new DeleteEquipoLAException(e.Message); }
-            catch (Exception)
-            {
-
-                throw new GetEquipoLAException ("Ha ocurrido un error inesperado");
-            }
+            catch (Exception){throw new GetEquipoLAException ("Ha ocurrido un error inesperado");}
         }
     }
 }

@@ -2,6 +2,7 @@
 using LogicaNegocio.Entidades;
 using LogicaNegocio.Interfaces.IRepositorios;
 using Microsoft.IdentityModel.Tokens;
+using LogicaNegocio.ValueObject;
 
 namespace LogicaConexion.EntityFramework.Repositorios
 {
@@ -43,7 +44,7 @@ namespace LogicaConexion.EntityFramework.Repositorios
             {
                 var admin = Get(obj.Id);
                 if (obj.Name.Data != null) {admin.Name.Data = obj.Name.Data; }
-                if(obj.Email.Data != null) { admin.Email.Data = obj.Email.Data; }
+                if(obj.Email.Data != null) { admin.Email =new Email( obj.Email.Data); }
 
                 _context.Administradores.Update(admin);
                 _context.SaveChanges();

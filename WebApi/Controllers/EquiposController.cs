@@ -1,4 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using LogicaAplicacion.CasosUso.Equipos;
+using LogicaAplicacion.Exceptions.Equipos;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
+using WebApi.DTOs;
+using WebApi.Excepciones;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,18 +14,53 @@ namespace WebApi.Controllers
     [ApiController]
     public class EquiposController : ControllerBase
     {
+        private IMapper _mapper;
+        private DeleteEquipo _delete;
+        private GetAllEquipo _getAll;
+        private GetEquipo _get;
+        private NewEquipo _new;
+        private UpdateEquipo _update;
+
+        public EquiposController(IMapper mapper, DeleteEquipo delete, GetAllEquipo getAll,
+                                 GetEquipo get, NewEquipo @new, UpdateEquipo update)
+        {
+            _mapper = mapper;
+            _delete = delete;
+            _getAll = getAll;
+            _get = get;
+            _new = @new;
+            _update = update;
+        }
+
+
         // GET: api/<EquiposController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public ActionResult Get(int id)
         {
-            return new string[] { "value1", "value2" };
+            try
+            {
+                var equipo = _get.GetObject(id);
+                if (equipo == null) { throw new EquiposControllerException("No se ha encontrado el equipo buscado!"); }
+                return Ok(equipo);
+            }
+            catch (GetEquipoLAException e) { throw new EquiposControllerException(e.Message); }
+            catch (EquiposControllerException e) { throw new EquiposControllerException(e.Message); }
+            catch (Exception) { throw new EquiposControllerException("Ha ocurrido un error inesperado!"); }
         }
 
         // GET api/<EquiposController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public ActionResult GetAll()
         {
-            return "value";
+            try
+            {
+                List<EquipoDTO> list = _mapper.Map<List<EquipoDTO>>(_getAll.GetAllObj());
+                if(list.IsNullOrEmpty()) { throw new EquiposControllerException("No se han encontrado equipos en la base de datos!"); }
+                return Ok(list);
+            }
+            catch (GetAllEquipoLAException e) { throw new EquiposControllerException(e.Message); }
+            catch (EquiposControllerException e) { throw new EquiposControllerException(e.Message); }
+            catch (Exception) { throw new EquiposControllerException("Ha ocurrido un error inesperado!"); }
         }
 
         // POST api/<EquiposController>
