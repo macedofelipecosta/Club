@@ -1,5 +1,8 @@
 ﻿using AutoMapper;
 using LogicaAplicacion.CasosUso.Actividades;
+using LogicaAplicacion.Exceptions.Actividades;
+using LogicaConexion.EntityFramework.Exceptions;
+using LogicaNegocio.Entidades.Actividades;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using WebApi.DTOs;
@@ -21,7 +24,8 @@ namespace WebApi.Controllers
         private UpdateActividad _update;
 
 
-        public ActividadesController(IMapper mapper, GetActividad get, GetAll getAll, NewActividad @new, UpdateActividad update)
+        public ActividadesController(IMapper mapper, GetActividad get, GetAll getAll,
+                                        NewActividad @new, UpdateActividad update)
         {
             _mapper = mapper;
             _get = get;
@@ -41,7 +45,7 @@ namespace WebApi.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public ActionResult Get(int id)
+        public IActionResult Get(int id)
         {
             try
             {
@@ -49,6 +53,7 @@ namespace WebApi.Controllers
                 if (actividadDto == null) { throw new ActividadesControllerException("No se ha encontrado la actividad!"); }
                 return Ok(actividadDto);
             }
+            catch (GetActividadLAException e) { throw new ActividadesControllerException(e.Message); }
             catch (ActividadesControllerException e) { throw new ActividadesControllerException(e.Message); }
             catch (Exception) { throw new ActividadesControllerException("Ha ocurrido un error inesperado!"); }
         }
@@ -64,14 +69,25 @@ namespace WebApi.Controllers
                 List<ActividadDTO> actividades = _mapper.Map<List<ActividadDTO>>(lista);
                 return Ok(actividades);
             }
+            catch (RepositorioActividadException e) { throw new ActividadesControllerException(e.Message); }
             catch (ActividadesControllerException e) { throw new ActividadesControllerException(e.Message); }
             catch (Exception) { throw new ActividadesControllerException("Ha ocurrido un error inesperado!"); }
         }
 
         // POST api/<ActividadesController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post(ActividadDTO objDto)
         {
+            try
+            {
+                if (objDto == null) throw new ActividadesControllerException("No se ha recibido una actividad para dar de alta!");
+                var actividad=_mapper.Map<Actividad>(objDto);
+                _new.NewObj(actividad);
+            }
+            catch (NewActividadLAException e) { throw new ActividadesControllerException(e.Message); }
+            catch (ActividadesControllerException e) { throw new ActividadesControllerException(e.Message); }
+            catch (Exception) { throw new ActividadesControllerException("Ha ocurrido un error inesperado!"); }
+
         }
 
         // PUT api/<ActividadesController>/5

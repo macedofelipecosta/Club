@@ -1,5 +1,6 @@
 ﻿using LogicaAplicacion.Exceptions.Actividades;
 using LogicaAplicacion.Interfaces;
+using LogicaConexion.EntityFramework.Exceptions;
 using LogicaConexion.EntityFramework.Repositorios;
 using LogicaNegocio.Entidades.Actividades;
 using System;
@@ -25,10 +26,8 @@ namespace LogicaAplicacion.CasosUso.Actividades
             {
                 return _repo.Get(id);
             }
-            catch (Exception)
-            {
-                throw new GetActividadLAException ("Error al obtener actividad, Logica Aplicacion");
-            }
+            catch (RepositorioActividadException e) { throw new GetActividadLAException(e.Message); }
+            catch (Exception){throw new GetActividadLAException("Ha ocurrido un error ineseperado!");}
         }
     }
 }

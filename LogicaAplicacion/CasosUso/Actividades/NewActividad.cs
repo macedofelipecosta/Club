@@ -1,5 +1,6 @@
 ﻿using LogicaAplicacion.Exceptions.Actividades;
 using LogicaAplicacion.Interfaces;
+using LogicaConexion.EntityFramework.Exceptions;
 using LogicaConexion.EntityFramework.Repositorios;
 using LogicaNegocio.Entidades.Actividades;
 using LogicaNegocio.Interfaces.IRepositorios;
@@ -26,11 +27,10 @@ namespace LogicaAplicacion.CasosUso.Actividades
             {
                 _repo.Add(obj);
             }
-            catch (Exception)
-            {
-
-                throw new NewActividadLAException("Ha ocurrido un error inesperado, Logica aplicacion Actividades");
-            }
+            catch (RepositorioActividadException e) { throw new NewActividadLAException(e.Message); }
+            catch (Exception) { throw new NewActividadLAException("Ha ocurrido un error inesperado, Logica aplicacion Actividades"); }
+                
+            
         }
     }
 }
