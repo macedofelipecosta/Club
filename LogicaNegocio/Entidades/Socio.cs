@@ -26,7 +26,7 @@ namespace LogicaNegocio.Entidades
 
         public Socio()
         {
-            AgeAssign(this.Nacimiento.Data);
+            AgeAssign(Nacimiento.Data);
         }
 
 
